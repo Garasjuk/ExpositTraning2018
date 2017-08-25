@@ -10,7 +10,7 @@ public class Task6 {
 		Scanner in = new Scanner(System.in);
 		System.out.println("SEARCH NUMBER");
 		System.out.print("Text: ");
-		String a = in.next();
+		String a = in.nextLine();
 
 		System.out.println("With out number: " + isSearchNumber(a));
 
@@ -21,8 +21,8 @@ public class Task6 {
 
 		char[] chars = a.toCharArray();
 		String chare = "";
-		int count = chars.length, i = 0;
-
+		int count = a.length(), i = 0;
+	
 		while (i < count) {
 			if (chars[i] >= '0' && chars[i] <= '9') {
 				i++;
