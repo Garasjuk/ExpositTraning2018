@@ -1,0 +1,109 @@
+body, #mainWrapper {
+	height: 70%;
+	background-color:rgb(245, 245, 245);
+}
+
+body, .form-control{
+	font-size:12px!important;
+}
+
+body{
+	background-image: url(Royal_Carriage.jpg);
+	background-attachment: fixed;
+}
+
+.floatRight{
+	float:right;
+	margin-right: 18px;
+}
+
+.has-error{
+	color:red;
+}
+
+.errorLogin{
+	color:red;
+	text-align: center;
+	font-size: xx-large;
+}
+
+
+
+.formcontainer{
+	background-color: #DAE8E8;
+	padding: 20px;
+	heigth:20%;
+}
+
+.tablecontainer{
+	
+}
+
+
+.generic-container {
+  width:80%;
+  margin-left: 20px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #EAE7E7;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 0 30px black;
+  
+}
+
+.custom-width {
+    width: 80px !important;
+}
+
+.panel-menu {
+	background-color: #82d9e8;
+  padding: 10px 15px;
+  border-bottom: 1px solid transparent;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.panel-login {
+	text-align:right;
+	background-color: #c0c0c0;
+}
+
+.panel-search {
+	background-color: #b4cccd;
+	  padding: 10px 15px;
+  border-bottom: 1px solid transparent;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.advertconteinerleft{
+	width:20%;
+	display: inline-block; 
+    float:left;
+	
+}
+
+.advertconteinerright{
+	width:80%; 
+	display: inline-block;
+	float:left;
+}
+
+.form-actions-model{
+	width:20%;
+	display: inline-block;
+	float:right;
+}
+
+.control-lable-order-head{
+	font-size: x-large;
+}
+
+.control-lable-order-body{
+	font-size: large;
+}
+
+
