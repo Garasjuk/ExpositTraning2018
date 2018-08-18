@@ -9,6 +9,7 @@ angular.module('myApp').factory('Service', ['$http', '$q', function($http, $q){
         fetchAllCategory: fetchAllCategory,
         createUser: createUser,
         updateUser:updateUser,
+        updateAdvert:updateAdvert,
         deleteUser:deleteUser,
         deleteAdvert:deleteAdvert,
         loginUser:loginUser,
@@ -32,8 +33,19 @@ angular.module('myApp').factory('Service', ['$http', '$q', function($http, $q){
         getAllModel:getAllModel,
         getAllRole:getAllRole,
         getAllTransmission:getAllTransmission,
+        getAllAdvert:getAllAdvert,
         uploadFileToUrl:uploadFileToUrl,
-        insertAdvert:insertAdvert
+        insertAdvert:insertAdvert,
+        orderAdvert:orderAdvert,
+        countNewOrder:countNewOrder,
+        getAllOrder:getAllOrder,
+        ignoreOrder:ignoreOrder,
+        activeOrder:activeOrder,
+        deleteOrderWait:deleteOrderWait,
+        getAllAbout:getAllAbout,
+        saveSetings:saveSetings,
+        savePass:savePass,
+        updateOkOrderWait:updateOkOrderWait
     };
 
     return factory;
@@ -41,11 +53,170 @@ angular.module('myApp').factory('Service', ['$http', '$q', function($http, $q){
     
     
     
-//    function insertAdvert(id_model, id_marka, year_of_issue, gov_number, miliage, seats, location, transmission, body, drive, engine, fuel, consumption, demage, accessory, insurance, cena, text){
-   	function insertAdvert(advert, id_user){
+    
+// ---------------Pagination-----------------------------
+    
+// ------------------------------------------------------   
+    
+    
+    
+    function savePass(id, pass) {
+    	var deferred = $q.defer();
+    	$http.put(REST_SERVICE_URI + 'user/changePass/' + id + "/" + pass)
+    	.then(
+    			function (response) {
+    				deferred.resolve(response.data);
+    			},
+    			function(errResponse){
+    				console.error('Error while fetching savePass');
+    				deferred.reject(errResponse);
+    			}
+    	);
+    	return deferred.promise;
+    }
+    
+    function saveSetings(allAbout) {
+    	var deferred = $q.defer();
+    	$http.put(REST_SERVICE_URI + 'about/update/', allAbout)
+    	.then(
+    			function (response) {
+    				deferred.resolve(response.data);
+    			},
+    			function(errResponse){
+    				console.error('Error while fetching saveSetings');
+    				deferred.reject(errResponse);
+    			}
+    	);
+    	return deferred.promise;
+    }
+    
+    function getAllAbout() {
+    	var deferred = $q.defer();
+    	$http.get(REST_SERVICE_URI + '/about/')
+    	.then(
+    			function (response) {
+    				deferred.resolve(response.data);
+    			},
+    			function(errResponse){
+    				console.error('Error while fetching about');
+    				deferred.reject(errResponse);
+    			}
+    	);
+    	return deferred.promise;
+    }
+    
+    function updateOkOrderWait(id){
+    	var deferred = $q.defer();
+    	$http.put(REST_SERVICE_URI + '/order/ok/' + id)
+    	.then(
+    			function (response) {
+    				deferred.resolve(response.data);
+    			},
+    			function(errResponse){
+    				console.error('Error while fetching activeOrder');
+    				deferred.reject(errResponse);
+    			}
+    	);
+    	return deferred.promise;
+    }
+
+    function deleteOrderWait(id){
+    	var deferred = $q.defer();
+    	$http.put(REST_SERVICE_URI + '/order/delete/' + id)
+    	.then(
+    			function (response) {
+    				deferred.resolve(response.data);
+    			},
+    			function(errResponse){
+    				console.error('Error while fetching activeOrder');
+    				deferred.reject(errResponse);
+    			}
+    	);
+    	return deferred.promise;
+    }
+    
+    function activeOrder(id_order, id_user, price){
+    	var deferred = $q.defer();
+    	$http.put(REST_SERVICE_URI + '/order/active/' + id_order + '/' + id_user + "/" + price)
+    	.then(
+    			function (response) {
+    				deferred.resolve(response.data);
+    			},
+    			function(errResponse){
+    				console.error('Error while fetching activeOrder');
+    				deferred.reject(errResponse);
+    			}
+    	);
+    	return deferred.promise;
+    }
+    
+    function ignoreOrder(id_order, id_user, retVal){
+    	alert("ignoreOrder Service " + retVal);
+    	var deferred = $q.defer();
+    	$http.put(REST_SERVICE_URI + '/order/ignore/' + id_order + '/' + id_user + '/' + retVal)
+    	.then(
+    			function (response) {
+    				deferred.resolve(response.data);
+    			},
+    			function(errResponse){
+    				console.error('Error while fetching ignoreOrder');
+    				deferred.reject(errResponse);
+    			}
+    	);
+    	return deferred.promise;
+    }
+    
+    function getAllOrder() {
+    	var deferred = $q.defer();
+    	$http.get(REST_SERVICE_URI + '/allOrder/')
+    	.then(
+    			function (response) {
+    				deferred.resolve(response.data);
+    			},
+    			function(errResponse){
+    				console.error('Error while fetching Order');
+    				deferred.reject(errResponse);
+    			}
+    	);
+    	return deferred.promise;
+    }
+    
+    
+    function countNewOrder(id) {
+    	var deferred = $q.defer();
+    	$http.get(REST_SERVICE_URI + 'order/count/' + id)
+    	.then(
+    			function (response) {
+    				deferred.resolve(response.data);
+    			},
+    			function(errResponse){
+    				console.error('Error while fetching Order');
+    				deferred.reject(errResponse);
+    			}
+    	);
+    	return deferred.promise;
+    }
+    
+    function orderAdvert(id_advert, id_user, orderDate){
+    	var deferred = $q.defer();
+    	$http.post(REST_SERVICE_URI + 'order/' + id_advert +"/"+ id_user +"/"+ orderDate)
+    	.then(
+    			function (response) {
+    				deferred.resolve(response.data);
+    			},
+    			function(errResponse){
+    				console.error('Error while creating Order');
+    				deferred.reject(errResponse);
+    			}
+    	);
+    	return deferred.promise;
+    }
+
+    //    function insertAdvert(id_model, id_marka, year_of_issue, gov_number, miliage, seats, location, transmission, body, drive, engine, fuel, consumption, demage, accessory, insurance, cena, text){
+   	function insertAdvert(advert, id_user, newAdvertDate){
     	 var deferred = $q.defer();
 //         $http.post(REST_SERVICE_URI + 'advert/' + id_model + id_marka + year_of_issue + gov_number + miliage + seats + location + transmission + body + drive + engine + fuel + consumption + demage + accessory + insurance + cena + text )
-         $http.post(REST_SERVICE_URI + 'advert/' + id_user, advert)
+         $http.post(REST_SERVICE_URI + 'advert/' + id_user +'/' + newAdvertDate, advert)
              .then(
              function (response) {
                  deferred.resolve(response.data);
@@ -72,6 +243,21 @@ angular.module('myApp').factory('Service', ['$http', '$q', function($http, $q){
         	 console.dir(file);
         	alert('error');
         });
+    }
+    
+    function getAllAdvert() {
+    	var deferred = $q.defer();
+    	$http.get(REST_SERVICE_URI + '/allAdvert/')
+    	.then(
+    			function (response) {
+    				deferred.resolve(response.data);
+    			},
+    			function(errResponse){
+    				console.error('Error while fetching Advert');
+    				deferred.reject(errResponse);
+    			}
+    	);
+    	return deferred.promise;
     }
     
     function getAllTransmission() {
@@ -410,10 +596,25 @@ angular.module('myApp').factory('Service', ['$http', '$q', function($http, $q){
         return deferred.promise;
     }
 
+    
+    function updateAdvert(advert) {
+    	var deferred = $q.defer();
+    	$http.put(REST_SERVICE_URI + 'advert/update/', advert)
+    	.then(
+    			function (response) {
+    				deferred.resolve(response.data);
+    			},
+    			function(errResponse){
+    				console.error('Error while updating User');
+    				deferred.reject(errResponse);
+    			}
+    	);
+    	return deferred.promise;
+    }
 
-    function updateUser(user, id) {
+    function updateUser(user, id, issued_passport, date_birthday, issued_license, valid_license) {
         var deferred = $q.defer();
-        $http.put(REST_SERVICE_URI + 'user/' +id, user)
+        $http.put(REST_SERVICE_URI + 'user/' +id +"/"+ issued_passport +"/"+ date_birthday +"/"+ issued_license +"/"+ valid_license, user)
             .then(
             function (response) {
                 deferred.resolve(response.data);

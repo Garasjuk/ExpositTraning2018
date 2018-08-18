@@ -13,6 +13,7 @@ ru\site\spring\utility\PasswordString.class
 ru\site\spring\model\Photo.class
 ru\site\spring\dao\CategoryDaoImpl.class
 ru\site\spring\model\Engine.class
+ru\site\spring\service\AboutService.class
 ru\site\spring\dao\RoleDao.class
 ru\site\spring\service\UserService.class
 ru\site\spring\dao\BodyDaoImpl.class
@@ -22,15 +23,21 @@ ru\site\spring\dao\EngineDaoImpl.class
 ru\site\spring\service\RoleServiceImpl.class
 ru\site\spring\model\Role.class
 ru\site\spring\controller\CarriageController.class
+ru\site\spring\model\About.class
 ru\site\spring\service\AdvertServiceImpl.class
+ru\site\spring\dao\AboutDaoImpl.class
 ru\site\spring\model\Fuel.class
 ru\site\spring\configuration\DBConfig.class
+ru\site\spring\service\OrderService.class
 ru\site\spring\email\Connect$1.class
 ru\site\spring\dao\RoleDaoImpl.class
 ru\site\spring\model\Advert.class
+ru\site\spring\service\AboutServiceImpl.class
+ru\site\spring\service\OrderServiceImpl.class
 ru\site\spring\model\Transmission.class
 ru\site\spring\service\BodyService.class
 ru\site\spring\email\EmailProperties.class
+ru\site\spring\model\Orders.class
 ru\site\spring\service\DriveServiceImpl.class
 ru\site\spring\dao\ModelDaoImpl.class
 ru\site\spring\email\EmailSend.class
@@ -40,6 +47,7 @@ ru\site\spring\service\RoleService.class
 ru\site\spring\service\DriveService.class
 ru\site\spring\model\Body.class
 ru\site\spring\service\TransmissionService.class
+ru\site\spring\dao\AboutDao.class
 ru\site\spring\dao\DriveDao.class
 ru\site\spring\service\MarkaServiceImpl.class
 ru\site\spring\service\EngineService.class
@@ -56,6 +64,7 @@ ru\site\spring\model\Calendar.class
 ru\site\spring\dao\FuelDao.class
 ru\site\spring\service\ModelServiceImpl.class
 ru\site\spring\model\Marka.class
+ru\site\spring\dao\OrderDaoImpl.class
 ru\site\spring\model\Category.class
 ru\site\spring\controller\IndexController.class
 ru\site\spring\service\FuelServiceImpl.class
@@ -66,3 +75,4 @@ ru\site\spring\service\EngineServiceImpl.class
 ru\site\spring\service\CategoryServiceImpl.class
 ru\site\spring\dao\UserDaoImpl.class
 ru\site\spring\service\MarkaService.class
+ru\site\spring\dao\OrderDao.class

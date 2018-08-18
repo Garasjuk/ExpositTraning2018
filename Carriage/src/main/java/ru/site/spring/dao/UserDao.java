@@ -12,6 +12,7 @@ public interface UserDao {
 	User findByEmail(String email);
 	User findById(long id);
 	void updateUser(User user);
+	void updatePassUser(long id, String pass);
 	void updateActiveUser(long id);
 	int countNewUser();
 	List getNewUser(); 

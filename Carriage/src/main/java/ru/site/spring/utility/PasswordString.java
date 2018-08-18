@@ -27,7 +27,6 @@ public class PasswordString {
         catch (Exception e){
 
         }
-        System.out.println( "pass " + output );
         return output;
 	}
 }

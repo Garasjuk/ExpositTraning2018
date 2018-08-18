@@ -41,8 +41,11 @@ angular.module('myApp').factory('Service', ['$http', '$q', function($http, $q){
         getAllOrder:getAllOrder,
         ignoreOrder:ignoreOrder,
         activeOrder:activeOrder,
-        deleteOrderWait:deleteOrderWait
-        
+        deleteOrderWait:deleteOrderWait,
+        getAllAbout:getAllAbout,
+        saveSetings:saveSetings,
+        savePass:savePass,
+        updateOkOrderWait:updateOkOrderWait
     };
 
     return factory;
@@ -51,10 +54,72 @@ angular.module('myApp').factory('Service', ['$http', '$q', function($http, $q){
     
     
     
- 
+// ---------------Pagination-----------------------------
+    
+// ------------------------------------------------------   
     
     
     
+    function savePass(id, pass) {
+    	var deferred = $q.defer();
+    	$http.put(REST_SERVICE_URI + 'user/changePass/' + id + "/" + pass)
+    	.then(
+    			function (response) {
+    				deferred.resolve(response.data);
+    			},
+    			function(errResponse){
+    				console.error('Error while fetching savePass');
+    				deferred.reject(errResponse);
+    			}
+    	);
+    	return deferred.promise;
+    }
+    
+    function saveSetings(allAbout) {
+    	var deferred = $q.defer();
+    	$http.put(REST_SERVICE_URI + 'about/update/', allAbout)
+    	.then(
+    			function (response) {
+    				deferred.resolve(response.data);
+    			},
+    			function(errResponse){
+    				console.error('Error while fetching saveSetings');
+    				deferred.reject(errResponse);
+    			}
+    	);
+    	return deferred.promise;
+    }
+    
+    function getAllAbout() {
+    	var deferred = $q.defer();
+    	$http.get(REST_SERVICE_URI + '/about/')
+    	.then(
+    			function (response) {
+    				deferred.resolve(response.data);
+    			},
+    			function(errResponse){
+    				console.error('Error while fetching about');
+    				deferred.reject(errResponse);
+    			}
+    	);
+    	return deferred.promise;
+    }
+    
+    function updateOkOrderWait(id){
+    	var deferred = $q.defer();
+    	$http.put(REST_SERVICE_URI + '/order/ok/' + id)
+    	.then(
+    			function (response) {
+    				deferred.resolve(response.data);
+    			},
+    			function(errResponse){
+    				console.error('Error while fetching activeOrder');
+    				deferred.reject(errResponse);
+    			}
+    	);
+    	return deferred.promise;
+    }
+
     function deleteOrderWait(id){
     	var deferred = $q.defer();
     	$http.put(REST_SERVICE_URI + '/order/delete/' + id)
@@ -70,9 +135,9 @@ angular.module('myApp').factory('Service', ['$http', '$q', function($http, $q){
     	return deferred.promise;
     }
     
-    function activeOrder(id_order, id_user){
+    function activeOrder(id_order, id_user, price){
     	var deferred = $q.defer();
-    	$http.put(REST_SERVICE_URI + '/order/active/' + id_order + '/' + id_user)
+    	$http.put(REST_SERVICE_URI + '/order/active/' + id_order + '/' + id_user + "/" + price)
     	.then(
     			function (response) {
     				deferred.resolve(response.data);
@@ -547,9 +612,9 @@ angular.module('myApp').factory('Service', ['$http', '$q', function($http, $q){
     	return deferred.promise;
     }
 
-    function updateUser(user, id) {
+    function updateUser(user, id, issued_passport, date_birthday, issued_license, valid_license) {
         var deferred = $q.defer();
-        $http.put(REST_SERVICE_URI + 'user/' +id, user)
+        $http.put(REST_SERVICE_URI + 'user/' +id +"/"+ issued_passport +"/"+ date_birthday +"/"+ issued_license +"/"+ valid_license, user)
             .then(
             function (response) {
                 deferred.resolve(response.data);

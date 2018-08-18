@@ -16,6 +16,8 @@ public interface UserService {
 	
 	void updateUser(User user);
 
+	void updatPassUser(long id, String pass);
+
 	void updateActiveUser(long id);
 	
 	void deleteUserById(long id);

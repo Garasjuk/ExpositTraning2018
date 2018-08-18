@@ -36,7 +36,7 @@ public class EmailSend {
 
 	            Transport.send(message);
 
-	           log.info("Email Sent successfully....");
+	           log.info("Email Sent successfully...." + email);
 
 	        } catch (MessagingException e) {
 	            throw new RuntimeException(e);

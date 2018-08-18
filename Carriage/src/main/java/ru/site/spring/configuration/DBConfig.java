@@ -12,6 +12,7 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import ru.site.spring.model.About;
 import ru.site.spring.model.Advert;
 import ru.site.spring.model.Body;
 import ru.site.spring.model.Calendar;
@@ -56,6 +57,7 @@ public class DBConfig {
 		   .addAnnotatedClasses(Body.class)
 		   .addAnnotatedClasses(Photo.class)
 		   .addAnnotatedClasses(Orders.class)
+		   .addAnnotatedClasses(About.class)
 		   .buildSessionFactory();
 	}
 	@Bean

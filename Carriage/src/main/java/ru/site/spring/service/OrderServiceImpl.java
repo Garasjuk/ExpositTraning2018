@@ -34,19 +34,21 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void updateIgnoreOrder(long id_order) {
 		orderDao.updateIgnoreOrder(id_order);
-		
 	}
 
 	@Override
-	public void updateActiveOrder(long id_order) {
-		orderDao.updateActiveOrder(id_order);
-		
+	public void updateActiveOrder(long id_order, int price) {
+		orderDao.updateActiveOrder(id_order, price);
 	}
 
 	@Override
 	public void deleteActiveOrder(long id_order) {
 		orderDao.deleteActiveOrder(id_order);
-		
+	}
+
+	@Override
+	public void updateOkOrderWait(long id_order) {
+		orderDao.updateOkOrderWait(id_order);
 	}
 	
 }

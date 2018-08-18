@@ -27,6 +27,12 @@ body{
 	font-size: xx-large;
 }
 
+.error{
+	color:red;
+	text-align: center;
+	font-size: xx-large;
+}
+
 
 
 .formcontainer{
@@ -92,3 +98,43 @@ body{
 	float:left;
 }
 
+.form-actions-model{
+	width:20%;
+	display: inline-block;
+	float:right;
+}
+
+.control-lable-order-head{
+	font-size: x-large;
+}
+
+.control-lable-order-body{
+	font-size: large;
+}
+
+.lead-main{
+	margin-bottom: 20px;
+  font-size: 42px;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.panel-heading-main{
+	text-align: center;
+}
+
+.text-main{
+	font-size: 22px;
+}
+
+.pagination{
+	
+  text-align: center;
+}
+
+.changePass{
+	font-size:  x-large;
+	width: 50%;
+
+	
+}

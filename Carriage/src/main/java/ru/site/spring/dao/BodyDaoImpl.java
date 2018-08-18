@@ -26,12 +26,7 @@ public class BodyDaoImpl implements BodyDao {
 
 	@Override
 	public List<Body> getAllBody() {
-
 		  List<Body> list = (List<Body>) sessionFactory.getCurrentSession().createQuery("from Body").list();
 		  return list;
-		
-//		Query query = sessionFactory.getCurrentSession().createSQLQuery("SELECT id, body FROM body ");
-//		 return (List<Body>) query.getResultList();
 	}
-
 }

@@ -18,33 +18,26 @@ import ru.site.spring.model.User;
 @Transactional
 @Repository
 public class UserDaoImpl implements UserDao {
-
-	@Autowired
-	private HibernateTemplate hibernateTemplate;
-
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Override
 	public List<User> getAllUsers() {
-		
 		  List<User> list = (List<User>) sessionFactory.getCurrentSession().createQuery("from User").list();
 		  return list;
-//		String hql = "FROM User";
-//		return (List<User>) hibernateTemplate.find(hql);
 	}
 
 	@Override
 	public void addUser(User user) {
-//		hibernateTemplate.save(user);
 		sessionFactory.getCurrentSession().save(user);
-
 	}
 
 	@Override
 	public User findByName(String name) {
-		String hql = "FROM User WHERE  user.username = ?";
-		return (User) hibernateTemplate.find(hql);
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class)
+				.add(Restrictions.eq("username", name));
+		return (User) criteria.uniqueResult();
 	}
 
 	@Override
@@ -54,16 +47,13 @@ public class UserDaoImpl implements UserDao {
 		return (User) criteria.uniqueResult();
 	}
 
-	
 	@Override
 	public User findById(long id) {
-		
-//		System.out.println("findById " + id);
-		
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class)
 				.add(Restrictions.eq("id", id));
 		return (User) criteria.uniqueResult();
 	}
+
 	@Override
 	public void updateUser( User user) {
 		sessionFactory.getCurrentSession().update(user);
@@ -90,6 +80,14 @@ public class UserDaoImpl implements UserDao {
 	public void updateActiveUser(long id) {
 		Query query = sessionFactory.getCurrentSession().createSQLQuery("UPDATE user SET active = ? WHERE id = ?");
 		query.setInteger(0, 1);
+		query.setLong(1, id);
+		query.executeUpdate();
+	}
+
+	@Override
+	public void updatePassUser(long id, String pass) {
+		Query query = sessionFactory.getCurrentSession().createSQLQuery("UPDATE user SET pass = ? WHERE id = ?");
+		query.setString(0, pass);
 		query.setLong(1, id);
 		query.executeUpdate();
 	}

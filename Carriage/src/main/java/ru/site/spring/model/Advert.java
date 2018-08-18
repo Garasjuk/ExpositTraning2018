@@ -56,8 +56,8 @@ public class Advert {
 	@Column(name = "consumption")
 	private String consumption;
 	
-	@Column(name = "demage")
-	private String demage;
+	@Column(name = "damage")
+	private String damage;
 	
 	@Column(name = "accessory")
 	private String accessory;
@@ -213,12 +213,12 @@ public class Advert {
 		this.consumption = consumption;
 	}
 
-	public String getDemage() {
-		return demage;
+	public String getDamage() {
+		return damage;
 	}
 
-	public void setDemage(String demage) {
-		this.demage = demage;
+	public void setDamage(String damage) {
+		this.damage = damage;
 	}
 
 	public String getAccessory() {

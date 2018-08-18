@@ -1,8 +1,19 @@
 'use strict';
 
-angular.module('myApp').controller('Controller', ['$scope',  'Service',
+angular.module('myApp').filter('startFrom', function(){
+	  return function(input, start){
+		    start = +start;
+		    return input.slice(start);
+		  }
+		}).controller('Controller', ['$scope',  'Service',
 				function($scope, Service, $sessionStorage) {
 					var self = this;
+					
+					self.allAbout = {
+							id : null,  
+							we_ofeer : ' ',
+							contact : ' '
+					};
 					
 					self.user = {
 						id : null,  last_name : ' ',
@@ -44,7 +55,7 @@ angular.module('myApp').controller('Controller', ['$scope',  'Service',
 							id_engine : ' ', 
 							id_fuel : ' ', 
 							consumption : ' ', 
-							demage : ' ', 
+							damage : ' ', 
 							accessory : ' ', 
 							insurance : ' ', 
 							cena : ' ', 
@@ -60,6 +71,7 @@ angular.module('myApp').controller('Controller', ['$scope',  'Service',
 					
 					
 					self.users = [];
+					self.advert = [];
 					self.allAdvert = [];
 					self.category = [];
 					self.loginUser = '';
@@ -104,6 +116,15 @@ angular.module('myApp').controller('Controller', ['$scope',  'Service',
 					self.ignoreOrder = ignoreOrder;
 					self.orderWeating = orderWeating;
 					self.deleteOrderWait = deleteOrderWait;
+					self.saveSetings = saveSetings;
+					self.setingsForm = setingsForm;
+					self.backConfirmation = backConfirmation;
+					self.backAdvert = backAdvert;
+					self.changePass = changePass;
+					self.savePass = savePass;
+					self.okOrderWait = okOrderWait;
+					self.contact = contact;
+					
 					
 					$scope.login = false;
 					$scope.home = true;
@@ -126,7 +147,12 @@ angular.module('myApp').controller('Controller', ['$scope',  'Service',
 					$scope.orderSubmit = false;
 					$scope.orderConfirmation = false;
 					$scope.orderWeating = false;
-
+					$scope.setings = false;
+					$scope.search = false;
+					$scope.changePass = false;
+					$scope.calculateOrder = false;
+					$scope.invalidPrice = false;
+					$scope.contact = false;
 					
 					
 					fetchAllUsers();
@@ -143,9 +169,119 @@ angular.module('myApp').controller('Controller', ['$scope',  'Service',
 					getAllBody();
 					getAllAdvert();
 					getAllOrder();
+					getAllAbout();
 					
 					
 					
+//------------------Map-----------------------------------
+//--------------------------------------------------------
+					
+//------------------Search-----------------------------------
+					$scope.searchFunction = function() {
+						var searchText = document.getElementById('searchText').value;
+						alert(searchText);
+//						self.advert = self.advert[2].filter(searchText);
+					}
+					
+//-----------------------------------------------------------
+					
+//	-----------------Pagination--------------------------------
+					$scope.currentPage = 0;
+					  $scope.itemsPerPage = 5;
+					  
+					  
+					  $scope.firstPage = function() {
+						  alert('firstPage ' + $scope.currentPage);  
+					    return $scope.currentPage == 0;
+					  }
+					  $scope.lastPage = function() {
+					    var lastPageNum = Math.ceil(self.advert.length / $scope.itemsPerPage - 1);
+					    return $scope.currentPage == lastPageNum;
+					  }
+					  $scope.numberOfPages = function(){
+					    return Math.ceil(self.advert.length / $scope.itemsPerPage);
+					  }
+					  $scope.startingItem = function() {
+						  return $scope.currentPage * $scope.itemsPerPage;
+					  }
+					  $scope.pageBack = function() {
+						  if($scope.currentPage > 0){
+							  $scope.currentPage = $scope.currentPage - 1;
+						  }else {
+							  $scope.currentPage;
+						  }
+					  }
+					  $scope.pageForward = function() {
+//						  alert($scope.currentPage +" " + Math.ceil(self.advert.length / $scope.itemsPerPage) );
+						  if (($scope.currentPage +1 ) < Math.ceil(self.advert.length / $scope.itemsPerPage) ){
+							  $scope.currentPage = $scope.currentPage + 1;
+						  }else {
+							  $scope.currentPage;
+						  }
+					  }
+					          					
+//	-----------------------------------------------------------------------------------------------------			
+					
+
+					  function contact (){
+						  falseBlock();
+						  $scope.contact = true;
+					  }
+
+					  function changePass (){
+						  falseBlock();
+						  $scope.changePass = true;
+					  }
+					  
+					  function savePass (id){
+						  var pass = document.getElementById('pass1').value;
+						  Service.savePass(id, pass).then(function(d) {
+						  }, function(errResponse) {
+							  console.error('Error while fetching savePass');
+						  });
+						  getAllAbout();
+						  profile(0);						  
+					  }
+					  
+					  function backAdvert(){
+						  falseBlock();
+						  about();
+					  }
+
+					  function backConfirmation(){
+						  falseBlock();
+						  orderConfirmation();
+					  }
+					  
+					  function setingsForm(){
+						  falseBlock();
+						  $scope.setings = true;	
+					  }
+
+					  function saveSetings(){
+							  Service.saveSetings(self.allAbout).then(function(d) {
+							  }, function(errResponse) {
+								  console.error('Error while fetching allAbout');
+							  });
+							  getAllAbout();
+							  falseBlock();
+							  $scope.home = true;	
+					  }
+					  
+					  function okOrderWait(id){
+							if(confirm("Are you shure ?")){
+								Service.updateOkOrderWait(id).then(function(d) {
+								}, function(errResponse) {
+									console.error('Error while fetching okOrderWait');
+								});
+								falseBlock();
+								getAllOrder();
+								$scope.orderWeating = true;	
+							}else{
+								
+							}
+					  }
+					  
 					function deleteOrderWait(id){
 						if(confirm("Are you shure ?")){
 							Service.deleteOrderWait(id).then(function(d) {
@@ -158,10 +294,7 @@ angular.module('myApp').controller('Controller', ['$scope',  'Service',
 						}else{
 							
 						}
-						
-						
 					}
-					
 					
 					function orderWeating(){
 						falseBlock();
@@ -171,18 +304,27 @@ angular.module('myApp').controller('Controller', ['$scope',  'Service',
 					}
 					
 					function activeOrder(id_order, id_user){	
-						alert("activeOrder ");
-						Service.activeOrder(id_order, id_user).then(function(d) {
-						}, function(errResponse) {
-							console.error('Error while fetching ignoreOrder');
-						});
-						falseBlock();
-						getAllOrder();
-						$scope.orderConfirmation = true;
+//						alert("activeOrder ");
+							var price = prompt("Enter the price : ", "the price write here");
+//							alert("price " + price);
+							if (price != null){
+								if (price % 1 === 0){
+									Service.activeOrder(id_order, id_user, price).then(function(d) {
+									}, function(errResponse) {
+										console.error('Error while fetching ignoreOrder');
+									});
+									falseBlock();
+									getAllOrder();
+									$scope.orderConfirmation = true;
+								}else{
+									$scope.invalidPrice = true;
+								}
+							}
+//							alert(price);
 					} 
 					
 					function ignoreOrder(id_order, id_user){
-						alert("ignoreOrder ");
+//						alert("ignoreOrder ");
 						var retVal = prompt("Enter reason for refusal : ", "reason for refusal here");
 						
 						Service.ignoreOrder(id_order, id_user, retVal).then(function(d) {
@@ -196,6 +338,7 @@ angular.module('myApp').controller('Controller', ['$scope',  'Service',
 					
 					function showUser(id){	
 						falseBlock();
+						$scope.showUserID = id;
 						$scope.showUser = true;
 					} 
 
@@ -206,11 +349,12 @@ angular.module('myApp').controller('Controller', ['$scope',  'Service',
 					
 					function setOrder(){	
 						var orderDate = document.getElementById('orderDate').value;
-						
 						Service.orderAdvert(self.orderAdvert, self.orderUser, orderDate ).then(
 								function(errResponse) {
 									console.error('Error while deleting Order');
 								});
+						falseBlock();
+						about();
 					} 
 					
 					function orderCar(id_advert, id_user){
@@ -257,8 +401,6 @@ angular.module('myApp').controller('Controller', ['$scope',  'Service',
 								});
 					}
 					
-					
-					
 					function yourAdvert(){
 						falseBlock();
 						$scope.yourAdvert = true;
@@ -287,6 +429,14 @@ angular.module('myApp').controller('Controller', ['$scope',  'Service',
 						var newAdvertDate = document.getElementById('newAdvertDate').value;
 											
 						insertAdvert(self.adv, id_user,newAdvertDate );
+					}
+				
+					function getAllAbout(){
+						Service.getAllAbout().then(function(d) {
+							self.allAbout = d;
+						}, function(errResponse) {
+							console.error('Error while fetching About');
+						});	
 					}
 					
 					function getAllOrder(){
@@ -485,10 +635,8 @@ angular.module('myApp').controller('Controller', ['$scope',  'Service',
 						}, function(errResponse) {
 							console.error('Error while fetching Advert');
 						});
-						
 						falseBlock();
 						$scope.home = true;
-						
 					}
 					
 					
@@ -498,10 +646,8 @@ angular.module('myApp').controller('Controller', ['$scope',  'Service',
 						}, function(errResponse) {
 							console.error('Error while fetching Users');
 						});
-						
 						falseBlock();
 						$scope.home = true;
-						
 					}
 
 					function fetchAllCategory() {
@@ -513,7 +659,6 @@ angular.module('myApp').controller('Controller', ['$scope',  'Service',
 					}
 
 					function afterUpdataAllUsers() {
-						
 						Service.byEmail(self.emailUser).then(function(d) {
 							self.loginUser = d;
 						}, function(errResponse) {
@@ -525,27 +670,14 @@ angular.module('myApp').controller('Controller', ['$scope',  'Service',
 					}
 					
 					function profile(id) {
-						
-//						Service.profile(id).then(function(d) {
-//							self.users = d;
-//						}, function(errResponse) {
-//							console.error('Error while fetching Users');
-//						});
-						
-						
 						falseBlock();
-						
 						$scope.profile = true;
 						$scope.myForm.$setPristine();
-
 					}
-
 					
 					$scope.resetLoginForm = function() {
 						$scope.email = '';
 						$scope.pass = '';
-
-						
 					}
 
 					function falseBlock() {
@@ -566,6 +698,14 @@ angular.module('myApp').controller('Controller', ['$scope',  'Service',
 						$scope.orderSubmit = false;
 						$scope.orderConfirmation = false;
 						$scope.orderWeating = false;
+						$scope.setings = false;
+						$scope.showUser = false;
+						$scope.search = false;
+						$scope.changePass = false;
+						$scope.calculateOrder = false;
+						$scope.invalidPrice = false;
+						$scope.contact = false;
+						
 					}
 					
 					function countNewOrder(id) {
@@ -602,9 +742,7 @@ angular.module('myApp').controller('Controller', ['$scope',  'Service',
 							console.error('Error while fetching Users');
 						});
 						falseBlock();
-						
 						$scope.home = true;
-						
 					}
 					
 					function createUser(user) {
@@ -613,28 +751,30 @@ angular.module('myApp').controller('Controller', ['$scope',  'Service',
 									console.error('Error while creating User');
 								});
 					}
-
 					
 					function updateAdvert() {
-						alert ('updateAdvert');
+//						alert ('updateAdvert');
 						Service.updateAdvert(self.adv).then(fetchAllAdvert,
-								
 						function(errResponse) {
 							console.error('Error while updating Advert');
 						});
-						
 						yourAdvert();
 					}
 
 					function updateUser(user, id) {
-					
-						Service.updateUser(user, id).then(function (d){
+						
+						var issued_passport = document.getElementById('issued_passport').value;
+						var date_birthday = document.getElementById('date_birthday').value;
+						var issued_license = document.getElementById('issued_license').value;
+						var valid_license = document.getElementById('valid_license').value;
+
+						
+						Service.updateUser(user, id, issued_passport, date_birthday, issued_license, valid_license ).then(function (d){
 								self.loginUser = d;	
 					},function(errResponse) {
 									console.error('Error while updating User');
 								});
 						profile();
-						
 					}
 
 					function deleteUser(id) {
@@ -664,7 +804,6 @@ angular.module('myApp').controller('Controller', ['$scope',  'Service',
 							}
 						}
 						$scope.profileEdit = true;
-						
 					}
 
 					function remove(id) {
@@ -737,11 +876,12 @@ angular.module('myApp').controller('Controller', ['$scope',  'Service',
 					function about() {
 						falseBlock();
 						$scope.about = true;
+						$scope.search = true;
 						$scope.myForm.$setPristine(); // about Form
 					}
 
 					function advert() {
-						alert('Advert');		
+//						alert('Advert');		
 						falseBlock();
 						$scope.advert = true;
 						$scope.myForm.$setPristine(); // advert Form
@@ -784,9 +924,7 @@ angular.module('myApp').controller('Controller', ['$scope',  'Service',
 						$scope.myForm.$setPristine(); // registration Form
 					}
 					
-					
 					function authorization(email, pass) {
-						
 						$scope.emailUser = email;
 						self.emailUser =$scope.emailUser; 
 						Service.loginUser(email, pass)
@@ -800,7 +938,6 @@ angular.module('myApp').controller('Controller', ['$scope',  'Service',
 //								$sessionStorage.loginUser = d;
 								$scope.buttonLogin = false;
 								$scope.buttonLogout = true;
-									
 										if (d.id_role == 1){
 											$scope.admin = true;
 											countNewUser();									
@@ -823,12 +960,9 @@ angular.module('myApp').controller('Controller', ['$scope',  'Service',
 								$scope.errorLogin = true;
 								$scope.myForm.$setPristine();
 							}
-							
 						}, function(errResponse) {
 							console.error('Error while creating User');
 						});
-						
 						 // about Form
 					}
-
 				} ]);

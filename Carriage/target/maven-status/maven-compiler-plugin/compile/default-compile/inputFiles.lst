@@ -9,9 +9,12 @@ C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\service\Tr
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\model\Transmission.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\service\AdvertServiceImpl.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\dao\UserDaoImpl.java
+C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\dao\AboutDao.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\email\Connect.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\service\UserService.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\dao\DriveDaoImpl.java
+C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\service\AboutService.java
+C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\dao\OrderDaoImpl.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\dao\EngineDaoImpl.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\dao\BodyDaoImpl.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\dao\ModelDaoImpl.java
@@ -30,6 +33,8 @@ C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\dao\Catego
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\service\DriveService.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\model\Body.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\service\UserServiceImpl.java
+C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\dao\AboutDaoImpl.java
+C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\service\AboutServiceImpl.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\configuration\CarriageInitializer.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\controller\CarriageController.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\configuration\DBConfig.java
@@ -37,6 +42,7 @@ C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\model\Driv
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\service\FuelServiceImpl.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\configuration\CarriageFilter.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\service\AdvertService.java
+C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\model\About.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\service\FuelService.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\service\BodyServiceImpl.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\dao\DriveDao.java
@@ -49,11 +55,14 @@ C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\model\Phot
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\service\EngineService.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\dao\ModelDao.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\service\BodyService.java
+C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\model\Orders.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\dao\BodyDao.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\dao\CategoryDaoImpl.java
+C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\dao\OrderDao.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\dao\TransmissionDaoImpl.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\model\Fuel.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\service\DriveServiceImpl.java
+C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\service\OrderService.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\dao\EngineDao.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\model\Role.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\dao\TransmissionDao.java
@@ -62,6 +71,7 @@ C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\model\User
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\dao\MarkaDaoImpl.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\controller\IndexController.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\model\Category.java
+C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\service\OrderServiceImpl.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\service\TransmissionService.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\dao\AdvertDao.java
 C:\Users\User\eclipse-workspace\Carriage\src\main\java\ru\site\spring\service\CategoryServiceImpl.java

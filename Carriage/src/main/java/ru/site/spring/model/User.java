@@ -303,10 +303,4 @@ public class User {
 		return "User [id=" + id + ", last_name=" + last_name + ",  email=" + email + "]";
 	}
 
-	
-	
-	
-	
-
-	
 }

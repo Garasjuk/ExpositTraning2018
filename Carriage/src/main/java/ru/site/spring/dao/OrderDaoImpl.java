@@ -26,7 +26,6 @@ public class OrderDaoImpl implements OrderDao {
 
 	@Override
 	public int countNewOrder(int id_user) {
-//		System.out.println("Count Order id_user " + id_user);
 		return ((Number) sessionFactory.getCurrentSession().createSQLQuery("SELECT count(advert.id) FROM advert INNER JOIN orders ON advert.id = orders.id_advert  WHERE advert.id_user like ?  AND orders.active like ?  ").setInteger(0, id_user).setInteger(1,0).uniqueResult()).intValue(); 
 	}
 
@@ -45,10 +44,12 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
-	public void updateActiveOrder(long id_order) {
-		Query query = sessionFactory.getCurrentSession().createSQLQuery("UPDATE orders SET active = ? WHERE id = ?");
-		query.setInteger(0, 1);
-		query.setLong(1, id_order);
+	public void updateActiveOrder(long id_order, int price) {
+//		System.out.println("updateActiveOrder " + price);
+		Query query = sessionFactory.getCurrentSession().createSQLQuery("UPDATE orders SET active = ? , cena = ? WHERE id = ?");
+		query.setInteger(0, 2);
+		query.setInteger(1, price);
+		query.setLong(2, id_order);
 		query.executeUpdate();		
 	}
 
@@ -59,5 +60,13 @@ public class OrderDaoImpl implements OrderDao {
 		query.setLong(1, id_order);
 		query.executeUpdate();
 		
+	}
+
+	@Override
+	public void updateOkOrderWait(long id_order) {
+		Query query = sessionFactory.getCurrentSession().createSQLQuery("UPDATE orders SET active = ? WHERE id = ?");
+		query.setInteger(0, 1);
+		query.setLong(1, id_order);
+		query.executeUpdate();
 	}
 }
