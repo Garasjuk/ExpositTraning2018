@@ -32,6 +32,7 @@ import ru.site.spring.model.Marka;
 import ru.site.spring.model.Model;
 import ru.site.spring.model.Orders;
 import ru.site.spring.model.Role;
+import ru.site.spring.model.Search;
 import ru.site.spring.model.Transmission;
 import ru.site.spring.model.User;
 import ru.site.spring.service.AboutService;
@@ -45,6 +46,7 @@ import ru.site.spring.service.MarkaService;
 import ru.site.spring.service.ModelService;
 import ru.site.spring.service.OrderService;
 import ru.site.spring.service.RoleService;
+import ru.site.spring.service.SearchService;
 import ru.site.spring.service.TransmissionService;
 import ru.site.spring.service.UserService;
 import ru.site.spring.utility.PasswordString;
@@ -85,7 +87,32 @@ public class CarriageController {
     @Autowired
     OrderService orderService;
     @Autowired
-    AboutService aboutService;
+    AboutService aboutService;    
+    @Autowired
+    SearchService searchService;
+    
+    
+    
+    
+    //------------------- Search ---------------------------------------------------------------------
+
+    @RequestMapping(value = "/search/", method = RequestMethod.POST)
+    public ResponseEntity <List> getSearch (@RequestBody() Search search) {
+    	
+    	System.out.println("getSearch");
+    	
+//    	Search currenSearch;
+//    	
+//    	
+//    	currenSearch.setCena(cena);
+    	List list = searchService.getSearch(search);
+    	if(list.isEmpty()){
+    		log.info("getSearch ");
+    		return new ResponseEntity <List> (HttpStatus.NO_CONTENT);
+    	}
+    	return new ResponseEntity <List> (list, HttpStatus.OK);
+//    	return null;
+    }
     
     
     //------------------- Update a User Active --------------------------------------------------------

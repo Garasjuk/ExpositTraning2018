@@ -63,7 +63,25 @@ angular.module('myApp').filter('startFrom', function(){
 							date_registration: ' ',
 							active : ' ',
 							id_user : ' '
-							
+					};
+
+					self.search = {
+							id : null,  
+							id_model : ' ', 
+							id_marka : ' ', 
+							year_of_issueStart : ' ', 
+							year_of_issueFinish : ' ', 
+							mileageStart : ' ', 
+							mileageFinish : ' ', 
+							seatsStart : ' ', 
+							seatsFinish : ' ', 
+							id_transmission : ' ', 
+							id_body : ' ', 
+							id_drive : ' ', 
+							id_engine : ' ', 
+							id_fuel : ' ', 
+							cenaStart : ' ', 
+							cenaFinish : ' ', 
 					};
 					
 					
@@ -173,14 +191,22 @@ angular.module('myApp').filter('startFrom', function(){
 					
 					
 					
-//------------------Map-----------------------------------
-//--------------------------------------------------------
 					
 //------------------Search-----------------------------------
 					$scope.searchFunction = function() {
-						var searchText = document.getElementById('searchText').value;
-						alert(searchText);
-//						self.advert = self.advert[2].filter(searchText);
+						  Service.getSearch(self.search).then(function(d) {
+							  self.advert = d;
+						  }, function(errResponse) {
+							  console.error('Error while fetching getSearch');
+						  });
+					}
+
+					$scope.searchClean = function() {
+						Service.fetchAllAdvert().then(function(d) {
+							self.advert = d;
+						}, function(errResponse) {
+							console.error('Error while fetching getSearch');
+						});
 					}
 					
 //-----------------------------------------------------------

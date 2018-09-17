@@ -72,15 +72,251 @@
 		<div class="panel panel-default" ng-show="search">
 			<div class="panel-search">
 				<div class="formcontainer">
-				<form ng-submit="ctrl.submit()" name="searchForm" class="form-horizontal">
+				
 					<div class="row">
+						<div class="form-group col-md-10">
+							<label class="col-md-1 control-lable" for="file">Marka</label>	
+							<div class="col-md-2">	
+								<select name="marka" class="form-control" ng-model="ctrl.search.id_marka" >
+									<option value="{{ma.id}}" ng-repeat="ma in ctrl.allMarka" class="form-control input-sm"  >
+										{{ma.marka}}
+									</option>
+								</select> 
+							</div>
+							<label class="col-md-1 control-lable" for="file">Model</label>	
+							<div class="col-md-2">	
+								<select name="model" class="form-control" ng-model="ctrl.search.id_model">
+									<option value="{{mo.id}}" ng-repeat="mo in ctrl.allModel" class="form-control input-sm" ng-selected="ctrl.select_marka == mo.id_marka"  >
+										{{mo.model}}
+									</option>
+								</select> 
+							</div>
+						</div>
+						<div class="form-group col-md-10">
+							<label class="col-md-1">Year of issue</label>
+								<div class="box">
+									<div class="col-md-2 container">	
+										<select name="year_of_issueStart" class="form-control" ng-model="ctrl.search.year_of_issueStart">
+												<option> 1990 </option>
+												<option> 1991 </option>
+												<option> 1992 </option>
+												<option> 1993 </option>
+												<option> 1994 </option>
+												<option> 1995 </option>
+												<option> 1996 </option>
+												<option> 1997 </option>
+												<option> 1998 </option>
+												<option> 1999 </option>
+												<option> 2000 </option>
+												<option> 2001 </option>
+												<option> 2002 </option>
+												<option> 2003 </option>
+												<option> 2004 </option>
+												<option> 2005 </option>
+												<option> 2006 </option>
+												<option> 2007 </option>
+												<option> 2008 </option>
+												<option> 2009 </option>
+												<option> 2010 </option>
+												<option> 2011 </option>
+												<option> 2012 </option>
+												<option> 2013 </option>
+												<option> 2014 </option>
+												<option> 2015 </option>
+												<option> 2016 </option>
+												<option> 2017 </option>
+												<option> 2018 </option>
+											</select>
+										</div> 
+										<div class="col-md-2 container">
+											<select name="year_of_issueFinish" class="form-control" ng-model="ctrl.search.year_of_issueFinish" >
+												<option> 1990 </option>
+												<option> 1991 </option>
+												<option> 1992 </option>
+												<option> 1993 </option>
+												<option> 1994 </option>
+												<option> 1995 </option>
+												<option> 1996 </option>
+												<option> 1997 </option>
+												<option> 1998 </option>
+												<option> 1999 </option>
+												<option> 2000 </option>
+												<option> 2001 </option>
+												<option> 2002 </option>
+												<option> 2003 </option>
+												<option> 2004 </option>
+												<option> 2005 </option>
+												<option> 2006 </option>
+												<option> 2007 </option>
+												<option> 2008 </option>
+												<option> 2009 </option>
+												<option> 2010 </option>
+												<option> 2011 </option>
+												<option> 2012 </option>
+												<option> 2013 </option>
+												<option> 2014 </option>
+												<option> 2015 </option>
+												<option> 2016 </option>
+												<option> 2017 </option>
+												<option> 2018 </option>
+											</select>
+										</div> 
+									</div> 
+							</div>
+						<div class="form-group col-md-10">
+							<label class="col-md-1 control-lable">Mileage</label>
+							<div class="box">
+								<div class="col-md-6">	
+									<select name="mileageStart" class="form-control" ng-model="ctrl.search.mileageStart">
+												<option> 0 </option>
+												<option> 100 000 </option>
+												<option> 200 000 </option>
+												<option> 300 000 </option>
+												<option> 400 000 </option>
+												<option> 500 000 </option>
+												<option> 600 000 </option>
+												<option> 700 000 </option>
+												<option> 800 000 </option>
+												<option> 900 000 </option>
+												<option> 1 000 000 </option>
+									</select>
+								</div>
+								<div class="col-md-6">	
+									<select name="mileageFinish" class="form-control" ng-model="ctrl.search.mileageFinish">
+											<option> 0 </option>
+											<option> 100 000 </option>
+											<option> 200 000 </option>
+											<option> 300 000 </option>
+											<option> 400 000 </option>
+											<option> 500 000 </option>
+											<option> 600 000 </option>
+											<option> 700 000 </option>
+											<option> 800 000 </option>
+											<option> 900 000 </option>
+											<option> 1 000 000 </option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="form-group col-md-10">
+							<label class="col-md-1 control-lable">Seats</label>
+							<div class="box">
+								<div class="col-md-6">
+									<select name="seatsStart" class="form-control" ng-model="ctrl.search.seatsStart">
+												<option> 1 </option>
+												<option> 2 </option>
+												<option> 5 </option>
+												<option> 8 </option>
+												<option> 15 </option>
+												<option> 30 </option>
+												<option> 45 </option>
+												<option> 60 </option>
+												<option> 80 </option>
+												<option> 100 </option>
+									</select>
+								</div>
+								
+								<div class="col-md-6">
+										<select name="seatsFinish" class="form-control" ng-model="ctrl.search.seatsFinish">
+												<option> 1 </option>
+												<option> 2 </option>
+												<option> 5 </option>
+												<option> 8 </option>
+												<option> 15 </option>
+												<option> 30 </option>
+												<option> 45 </option>
+												<option> 60 </option>
+												<option> 80 </option>
+												<option> 100 </option>
+										</select>
+								</div>
+							</div>
+						</div>
+						<div class="form-group col-md-10">	
+							<label class="col-md-1 control-lable" for="file">Transmission</label>	
+							<div class="col-md-2">	
+								<select name="transmission" class="form-control" ng-model="ctrl.search.id_transmission">
+									<option value="{{t.id}}" ng-repeat="t in ctrl.allTransmission" class="form-control input-sm"    >
+										{{t.transmission}}
+									</option>
+								</select> 
+							</div>
+							
+							<label class="col-md-1 control-lable" for="file">Body</label>	
+							<div class="col-md-2">		
+								<select name="body" class="form-control" ng-model="ctrl.search.id_body" >
+									<option value="{{b.id}}" ng-repeat="b in ctrl.allBody" ng-selected="ctrl.adv.id_body == b.id" >
+									{{b.body}}
+									</option>
+								</select> 
+							</div>
+					
+							<label class="col-md-1 control-lable" for="file">Drive</label>	
+							<div class="col-md-2">	
+								<select name="drive" class="form-control" ng-model="ctrl.search.id_drive">
+									<option value="{{d.id}}" ng-repeat="d in ctrl.allDrive" class="form-control input-sm"    >
+										{{d.drive}}
+									</option>
+								</select> 
+							</div>
+						</div>	
+						<div class="form-group col-md-10">			
+							<label class="col-md-1 control-lable" for="file">Engine</label>	
+							<div class="col-md-2">		
+								<select name="engine" class="form-control" ng-model="ctrl.search.id_engine">
+									<option value="{{e.id}}" ng-repeat="e in ctrl.allEngine" class="form-control input-sm"   >
+										{{e.engine}}
+									</option>
+								</select> 
+							</div>
+							
+							<label class="col-md-1 control-lable" for="file">Fuel</label>	
+							<div class="col-md-2">	
+								<select name="fuel" class="form-control" ng-model="ctrl.search.id_fuel">
+									<option value="{{f.id}}" ng-repeat="f in ctrl.allFuel" class="form-control input-sm"   >
+										{{f.fuel}}
+									</option>
+								</select> 
+							</div>
+						</div>						
+						<div class="form-group col-md-10">
+							<label class="col-md-1 control-lable" for="file">Cena</label>
+							<div class="box">
+								<div class="col-md-6">
+									<select name="cenaStart" class="form-control" ng-model="ctrl.search.cenaStart">
+										<option> 1 </option>
+										<option> 10 </option>
+										<option> 20 </option>
+										<option> 50 </option>
+										<option> 100 </option>
+										<option> 200 </option>
+										<option> 500 </option>
+									 	<option> 1000 </option>
+										<option> 2000 </option>
+										<option> 5000 </option>
+									</select>
+								</div>
+								<div class="col-md-6">
+									<select name="cenaFinish" class="form-control" ng-model="ctrl.search.cenaFinish">
+										<option> 1 </option>
+										<option> 10 </option>
+										<option> 20 </option>
+										<option> 50 </option>
+										<option> 100 </option>
+										<option> 200 </option>
+										<option> 500 </option>
+										<option> 1000 </option>
+										<option> 2000 </option>
+										<option> 5000 </option>
+									</select>
+								</div>
+							</div>
+						</div>
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="file">There is</label>
-							<input type="text" id="searchText" class="email form-control input-sm" />
 							<button class="btn btn-primary btn-sm"  ng-click="searchFunction()">Search</button>
+							<button class="btn btn btn-sm"  ng-click="searchClean()" >Clean</button>
 						</div>
 					</div>
-				</form>
 			</div>
 			</div>
 		</div>
@@ -1835,12 +2071,12 @@ function checkPass()
  
  function init(){ 
      var myMap = new ymaps.Map("map", {
-         center: [53.673882, 23.805897 ],
+         center: [53.703482, 23.818370 ],
          zoom: 16
          
      }); 
      
-     var myPlacemark = new ymaps.Placemark([53.673882, 23.805897], {
+     var myPlacemark = new ymaps.Placemark([53.703482, 23.818370], {
          hintContent: 'We are here!',
          balloonContent: 'We are here.'
      });

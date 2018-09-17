@@ -45,21 +45,29 @@ angular.module('myApp').factory('Service', ['$http', '$q', function($http, $q){
         getAllAbout:getAllAbout,
         saveSetings:saveSetings,
         savePass:savePass,
-        updateOkOrderWait:updateOkOrderWait
+        updateOkOrderWait:updateOkOrderWait,
+        getSearch:getSearch
     };
 
     return factory;
 
     
     
-    
-    
-// ---------------Pagination-----------------------------
-    
-// ------------------------------------------------------   
-    
-    
-    
+    function getSearch(search) {
+    	var deferred = $q.defer();
+    	$http.post(REST_SERVICE_URI + '/search/', search)
+    	.then(
+    			function (response) {
+    				deferred.resolve(response.data);
+    			},
+    			function(errResponse){
+    				console.error('Error while fetching getSearch');
+    				deferred.reject(errResponse);
+    			}
+    	);
+    	return deferred.promise;
+    }
+
     function savePass(id, pass) {
     	var deferred = $q.defer();
     	$http.put(REST_SERVICE_URI + 'user/changePass/' + id + "/" + pass)

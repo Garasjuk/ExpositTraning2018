@@ -25,6 +25,7 @@ import ru.site.spring.model.Model;
 import ru.site.spring.model.Orders;
 import ru.site.spring.model.Photo;
 import ru.site.spring.model.Role;
+import ru.site.spring.model.Search;
 import ru.site.spring.model.Transmission;
 import ru.site.spring.model.User;
 
@@ -58,6 +59,7 @@ public class DBConfig {
 		   .addAnnotatedClasses(Photo.class)
 		   .addAnnotatedClasses(Orders.class)
 		   .addAnnotatedClasses(About.class)
+		   .addAnnotatedClasses(Search.class)
 		   .buildSessionFactory();
 	}
 	@Bean
