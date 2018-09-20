@@ -78,6 +78,7 @@
 							<label class="col-md-1 control-lable" for="file">Marka</label>	
 							<div class="col-md-2">	
 								<select name="marka" class="form-control" ng-model="ctrl.search.id_marka" >
+									<option selected="selected" ></option>
 									<option value="{{ma.id}}" ng-repeat="ma in ctrl.allMarka" class="form-control input-sm"  >
 										{{ma.marka}}
 									</option>
@@ -86,6 +87,7 @@
 							<label class="col-md-1 control-lable" for="file">Model</label>	
 							<div class="col-md-2">	
 								<select name="model" class="form-control" ng-model="ctrl.search.id_model">
+									<option selected="selected" ></option>
 									<option value="{{mo.id}}" ng-repeat="mo in ctrl.allModel" class="form-control input-sm" ng-selected="ctrl.select_marka == mo.id_marka"  >
 										{{mo.model}}
 									</option>
@@ -97,6 +99,7 @@
 								<div class="box">
 									<div class="col-md-2 container">	
 										<select name="year_of_issueStart" class="form-control" ng-model="ctrl.search.year_of_issueStart">
+												<option selected="selected" ></option>
 												<option> 1990 </option>
 												<option> 1991 </option>
 												<option> 1992 </option>
@@ -130,6 +133,7 @@
 										</div> 
 										<div class="col-md-2 container">
 											<select name="year_of_issueFinish" class="form-control" ng-model="ctrl.search.year_of_issueFinish" >
+												<option selected="selected" ></option>
 												<option> 1990 </option>
 												<option> 1991 </option>
 												<option> 1992 </option>
@@ -168,6 +172,7 @@
 							<div class="box">
 								<div class="col-md-6">	
 									<select name="mileageStart" class="form-control" ng-model="ctrl.search.mileageStart">
+												<option selected="selected" ></option>
 												<option> 0 </option>
 												<option> 100 000 </option>
 												<option> 200 000 </option>
@@ -183,6 +188,7 @@
 								</div>
 								<div class="col-md-6">	
 									<select name="mileageFinish" class="form-control" ng-model="ctrl.search.mileageFinish">
+											<option selected="selected" ></option>
 											<option> 0 </option>
 											<option> 100 000 </option>
 											<option> 200 000 </option>
@@ -203,6 +209,7 @@
 							<div class="box">
 								<div class="col-md-6">
 									<select name="seatsStart" class="form-control" ng-model="ctrl.search.seatsStart">
+												<option selected="selected" ></option>
 												<option> 1 </option>
 												<option> 2 </option>
 												<option> 5 </option>
@@ -218,6 +225,7 @@
 								
 								<div class="col-md-6">
 										<select name="seatsFinish" class="form-control" ng-model="ctrl.search.seatsFinish">
+												<option selected="selected" ></option>
 												<option> 1 </option>
 												<option> 2 </option>
 												<option> 5 </option>
@@ -236,6 +244,7 @@
 							<label class="col-md-1 control-lable" for="file">Transmission</label>	
 							<div class="col-md-2">	
 								<select name="transmission" class="form-control" ng-model="ctrl.search.id_transmission">
+									<option selected="selected" ></option>
 									<option value="{{t.id}}" ng-repeat="t in ctrl.allTransmission" class="form-control input-sm"    >
 										{{t.transmission}}
 									</option>
@@ -245,6 +254,7 @@
 							<label class="col-md-1 control-lable" for="file">Body</label>	
 							<div class="col-md-2">		
 								<select name="body" class="form-control" ng-model="ctrl.search.id_body" >
+									<option selected="selected" ></option>
 									<option value="{{b.id}}" ng-repeat="b in ctrl.allBody" ng-selected="ctrl.adv.id_body == b.id" >
 									{{b.body}}
 									</option>
@@ -254,6 +264,7 @@
 							<label class="col-md-1 control-lable" for="file">Drive</label>	
 							<div class="col-md-2">	
 								<select name="drive" class="form-control" ng-model="ctrl.search.id_drive">
+									<option selected="selected" ></option>
 									<option value="{{d.id}}" ng-repeat="d in ctrl.allDrive" class="form-control input-sm"    >
 										{{d.drive}}
 									</option>
@@ -264,6 +275,7 @@
 							<label class="col-md-1 control-lable" for="file">Engine</label>	
 							<div class="col-md-2">		
 								<select name="engine" class="form-control" ng-model="ctrl.search.id_engine">
+									<option selected="selected" ></option>
 									<option value="{{e.id}}" ng-repeat="e in ctrl.allEngine" class="form-control input-sm"   >
 										{{e.engine}}
 									</option>
@@ -273,6 +285,7 @@
 							<label class="col-md-1 control-lable" for="file">Fuel</label>	
 							<div class="col-md-2">	
 								<select name="fuel" class="form-control" ng-model="ctrl.search.id_fuel">
+									<option selected="selected" ></option>
 									<option value="{{f.id}}" ng-repeat="f in ctrl.allFuel" class="form-control input-sm"   >
 										{{f.fuel}}
 									</option>
@@ -284,6 +297,7 @@
 							<div class="box">
 								<div class="col-md-6">
 									<select name="cenaStart" class="form-control" ng-model="ctrl.search.cenaStart">
+										<option selected="selected"></option>
 										<option> 1 </option>
 										<option> 10 </option>
 										<option> 20 </option>
@@ -298,6 +312,7 @@
 								</div>
 								<div class="col-md-6">
 									<select name="cenaFinish" class="form-control" ng-model="ctrl.search.cenaFinish">
+										<option selected="selected" ></option>
 										<option> 1 </option>
 										<option> 10 </option>
 										<option> 20 </option>

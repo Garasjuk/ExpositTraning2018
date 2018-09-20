@@ -99,7 +99,7 @@ public class CarriageController {
     @RequestMapping(value = "/search/", method = RequestMethod.POST)
     public ResponseEntity <List> getSearch (@RequestBody() Search search) {
     	
-    	System.out.println("getSearch");
+//    	System.out.println("getSearch");
     	
 //    	Search currenSearch;
 //    	
