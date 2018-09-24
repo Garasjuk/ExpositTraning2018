@@ -238,7 +238,6 @@ angular.module('myApp').filter('startFrom', function(){
 						  }
 					  }
 					  $scope.pageForward = function() {
-//						  alert($scope.currentPage +" " + Math.ceil(self.advert.length / $scope.itemsPerPage) );
 						  if (($scope.currentPage +1 ) < Math.ceil(self.advert.length / $scope.itemsPerPage) ){
 							  $scope.currentPage = $scope.currentPage + 1;
 						  }else {
@@ -330,9 +329,7 @@ angular.module('myApp').filter('startFrom', function(){
 					}
 					
 					function activeOrder(id_order, id_user){	
-//						alert("activeOrder ");
 							var price = prompt("Enter the price : ", "the price write here");
-//							alert("price " + price);
 							if (price != null){
 								if (price % 1 === 0){
 									Service.activeOrder(id_order, id_user, price).then(function(d) {
@@ -346,13 +343,10 @@ angular.module('myApp').filter('startFrom', function(){
 									$scope.invalidPrice = true;
 								}
 							}
-//							alert(price);
 					} 
 					
 					function ignoreOrder(id_order, id_user){
-//						alert("ignoreOrder ");
 						var retVal = prompt("Enter reason for refusal : ", "reason for refusal here");
-						
 						Service.ignoreOrder(id_order, id_user, retVal).then(function(d) {
 						}, function(errResponse) {
 							console.error('Error while fetching ignoreOrder');
@@ -416,7 +410,6 @@ angular.module('myApp').filter('startFrom', function(){
 					} 
 
 					function removeYourAdvert(id){
-						alert("removeYourAdvert " + id);
 						deleteAdvert(id);
 					} 
 					
@@ -432,16 +425,8 @@ angular.module('myApp').filter('startFrom', function(){
 						$scope.yourAdvert = true;
 					}
 					
-					
-					
-//					function insertAdvert(id_model, id_marka, year_of_issue, gov_number, miliage, seats, location, transmission, body, drive, engine, fuel, consumption, demage, accessory, insurance, cena, text){
 					function insertAdvert(advert, id_user, newAdvertDate){
-						alert("insertAdvert " + id_user );
-//						alert('insertAdvert ' + advert.id_model  +' '+ advert.id_marka +' '+ advert.year_of_issue + ' '+ advert.gov_number + ' '+ advert.miliage + ' '+ advert.seats + ' '+ advert.location + ' '+  advert.id_transmission + ' '+ advert.id_body + ' '+  advert.id_drive + ' '+ advert.id_engine + ' '+ advert.id_fuel + ' '+ consumption + ' '+ demage + ' '+ accessory + ' '+ insurance + ' '+ cena + ' '+ text);
-//						alert('insertAdvert ' + id_model  +' '+ id_marka +' '+ year_of_issue + ' '+ gov_number + ' '+ miliage + ' '+ seats + ''+ location + ' '+  transmission + ' '+ body + ' '+  drive + ' '+ engine + ' '+ fuel + ' '+ consumption + ' '+ demage + ' '+ accessory + ' '+ insurance + ' '+ cena + ' '+ text);
-//						Service.insertAdvert(id_model, id_marka, year_of_issue, gov_number, miliage, seats, location, transmission, body, drive, engine, fuel, consumption, demage, accessory, insurance, cena, text).then(function(d) {
 						Service.insertAdvert(advert, id_user, newAdvertDate).then(function(d) {
-//							self.allTransmission = d;
 						}, function(errResponse) {
 							console.error('Error while fetching Transmission');
 						});	
@@ -451,9 +436,7 @@ angular.module('myApp').filter('startFrom', function(){
 					}
 
 					function saveAdvert (id_user){
-						
 						var newAdvertDate = document.getElementById('newAdvertDate').value;
-											
 						insertAdvert(self.adv, id_user,newAdvertDate );
 					}
 				
@@ -546,14 +529,8 @@ angular.module('myApp').filter('startFrom', function(){
 					}
 					
 					function createAdvert(){
-//						alert('create Advert');
 						falseBlock();
 						$scope.createAdvert = true;
-//						Service.createAdvert().then(function(d) {
-////							self.allPhoto = d;
-//						}, function(errResponse) {
-//							console.error('Error while fetching Advert');
-//						});	
 					}
 					
 					function getAllPhoto(){
@@ -565,7 +542,6 @@ angular.module('myApp').filter('startFrom', function(){
 					}
 					
 					function activeAdvert(id){
-//						alert(id);
 						Service.updateActiveAdvert(id).then(function(d) {
 						}, function(errResponse) {
 							console.error('Error while fetching Advert');
@@ -577,7 +553,6 @@ angular.module('myApp').filter('startFrom', function(){
 					}
 
 					function activeUser(id){
-//						alert();
 						Service.updateActiveUser(id).then(function(d) {
 						}, function(errResponse) {
 							console.error('Error while fetching User');
@@ -772,14 +747,22 @@ angular.module('myApp').filter('startFrom', function(){
 					}
 					
 					function createUser(user) {
-						Service.createUser(user).then(fetchAllUsers,
-								function(errResponse) {
-									console.error('Error while creating User');
+						
+						Service.createUser(user).then(function(d){
+						if (d === null){
+							
+							$scope.errorEmail = true;
+						}else {
+							
+							fetchAllUsers();
+						}
+						},
+							function(errResponse) {
+								console.error('Error while creating User');
 								});
 					}
 					
 					function updateAdvert() {
-//						alert ('updateAdvert');
 						Service.updateAdvert(self.adv).then(fetchAllAdvert,
 						function(errResponse) {
 							console.error('Error while updating Advert');
@@ -793,7 +776,6 @@ angular.module('myApp').filter('startFrom', function(){
 						var date_birthday = document.getElementById('date_birthday').value;
 						var issued_license = document.getElementById('issued_license').value;
 						var valid_license = document.getElementById('valid_license').value;
-
 						
 						Service.updateUser(user, id, issued_passport, date_birthday, issued_license, valid_license ).then(function (d){
 								self.loginUser = d;	
@@ -839,7 +821,10 @@ angular.module('myApp').filter('startFrom', function(){
 													// there.
 							reset();
 						}
-						deleteUser(id);
+						if(confirm("Are you shure ?")){
+							deleteUser(id);
+							logout();
+						}
 					}
 
 					function resetAdvert() {

@@ -701,12 +701,9 @@
 					</div>
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="file">First
-								name</label>
+							<label class="col-md-2 control-lable" for="file">First	name</label>
 							<div class="col-md-7">
-								<input type="text" ng-model="ctrl.user.first_name"
-									name="first_name" class="form-control input-sm"
-									placeholder="Enter your First name" required />
+								<input type="text" ng-model="ctrl.user.first_name"	name="first_name" class="form-control input-sm"	placeholder="Enter your First name" required />
 							</div>
 						</div>
 					</div>
@@ -772,8 +769,7 @@
 					</div>
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="file">Location
-								birthday</label>
+							<label class="col-md-2 control-lable" for="file">Location	birthday</label>
 							<div class="col-md-7">
 								<input type="text" ng-model="ctrl.user.location_birthday"	name="location_birthday" class="form-control input-sm" placeholder="Enter your location birthday" required />
 							</div>
@@ -781,17 +777,15 @@
 					</div>
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="file">Series
-								license</label>
+							<label class="col-md-2 control-lable" for="file">Series license</label>
 							<div class="col-md-7">
-								<input type="text" ng-model="ctrl.user.series_license" name="series_license" class="form-control input-sm" placeholder="Enter your Series License" required />
+								<input type="text" id="input-field" onkeyup="validate();" ng-model="ctrl.user.series_license" name="series_license" class="form-control input-sm" placeholder="Enter your Series License" required />
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="file">Number
-								license</label>
+							<label class="col-md-2 control-lable" for="file">Number license</label>
 							<div class="col-md-7">
 								<input type="text" ng-model="ctrl.user.number_license" name="number_license" class="form-control input-sm" placeholder="Enter your Number License" required />
 							</div>
@@ -799,12 +793,9 @@
 					</div>
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="file">Issued
-								by license</label>
+							<label class="col-md-2 control-lable" for="file">Issued by license</label>
 							<div class="col-md-7">
-								<input type="text" ng-model="ctrl.user.issued_by_license"
-									name="issued_by_license" class="form-control input-sm"
-									placeholder="Enter your Issued by License" required />
+								<input type="text" ng-model="ctrl.user.issued_by_license" name="issued_by_license" class="form-control input-sm" placeholder="Enter your Issued by License" required />
 							</div>
 						</div>
 					</div>
@@ -829,7 +820,7 @@
 						<div class="form-group col-md-12">
 							<label class="col-md-2 control-lable" for="file">Id	category</label>
 							<div class="col-md-7">
-								<select name="category" >
+								<select name="category" ng-model="ctrl.user.id_category" >
 									<option value="{{c.id}}" ng-repeat="c in ctrl.category" ng-selected="ctrl.user.id_category == c.id">
 										{{c.category}}
 									</option>
@@ -1040,9 +1031,12 @@
 							<label class="col-md-2 control-lable" for="file">Email</label>
 							<div class="col-md-7">
 								<input type="email" ng-model="ctrl.user.email" name="email" class="email form-control input-sm" placeholder="Enter your Email" required />
+								<span ng-show="errorEmail">E-mail already in use </span>
 							</div>
 						</div>
 					</div>
+					
+					
 
 					<div class="row">
 						<div class="form-actions floatRight">
@@ -2098,7 +2092,12 @@ function checkPass()
      
      myMap.geoObjects.add(myPlacemark);
  }
-
+ 
+ function validate() {
+	  var element = document.getElementById('input-field');
+	  element.value = element.value.replace(/[^A-Z@]+/, '');
+	};
+ 
 </script>
 
  	<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&onload=init" type="text/javascript"></script>

@@ -47,12 +47,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	public void deleteUserById(long id) {
-		for (Iterator<User> iterator = users.iterator(); iterator.hasNext(); ) {
-		    User user = iterator.next();
-		    if (user.getId() == id) {
-		        iterator.remove();
-		    }
-		}
+		userDao.deleteUserById(id);
 	}
 
 	public boolean isUserExist(User user) {

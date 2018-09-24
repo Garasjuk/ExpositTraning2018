@@ -91,4 +91,11 @@ public class UserDaoImpl implements UserDao {
 		query.setLong(1, id);
 		query.executeUpdate();
 	}
+	
+	@Override
+	public void deleteUserById(long id) {
+		Query query = sessionFactory.getCurrentSession().createSQLQuery("DELETE FROM user WHERE id = ?");
+		query.setLong(0, id);
+		query.executeUpdate();
+	}
 }

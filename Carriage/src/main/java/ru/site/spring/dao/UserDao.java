@@ -15,5 +15,6 @@ public interface UserDao {
 	void updatePassUser(long id, String pass);
 	void updateActiveUser(long id);
 	int countNewUser();
-	List getNewUser(); 
+	List getNewUser();
+	void deleteUserById(long id); 
 }

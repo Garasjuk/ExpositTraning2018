@@ -472,22 +472,36 @@ public class CarriageController {
     //-------------------Create a User--------------------------------------------------------
     @RequestMapping(value = "/user/", method = RequestMethod.POST)
     public ResponseEntity<Void> createUser(@RequestBody User user,    UriComponentsBuilder ucBuilder) {
-    	Date date = new Date();
-    	ByteArrayOutputStream output = passwordString.getPassword();
-    	String temp = output.toString();
-    	try {
-			emailsend.sendMessage(user.getEmail(), "Registration on Carriage", "You pass " + temp );
-		} catch (IOException e) {
-			log.error("createUser " + e);
-		}
-    	user.setPass(DigestUtils.md5Hex(temp));
-    	user.setDate_registration(date);
- 
-        userService.saveUser(user);
- 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/user/{id}").buildAndExpand(user.getId()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+    	User currentUser = userService.findByEmail(user.getEmail());
+    	if (currentUser == null) {
+    		 Date date = new Date();
+    		 ByteArrayOutputStream output = passwordString.getPassword();
+    		 String temp = output.toString();
+	    	try {
+				emailsend.sendMessage(user.getEmail(), "Registration on Carriage", "You pass " + temp );
+			} catch (IOException e) {
+				log.error("createUser " + e);
+			}
+	    	user.setId_category(1);
+	    	user.setPass(DigestUtils.md5Hex(temp));
+	    	user.setDate_registration(date);
+	 
+	    	System.out.println("You register as " + user.getId_role());
+	    	System.out.println("Name " + user.getLast_name());
+	    	System.out.println("First Nmae  " + user.getFirst_name());
+	    	System.out.println("Series passport  " + user.getSeries_passport());
+
+	    	
+	    	
+	        userService.saveUser(user);
+	        
+	        HttpHeaders headers = new HttpHeaders();
+	        headers.setLocation(ucBuilder.path("/user/{id}").buildAndExpand(user.getId()).toUri());
+	        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+    	}else {
+    		return null;
+    	}
+    	
     }
     
     //------------------- Update a User Active --------------------------------------------------------
