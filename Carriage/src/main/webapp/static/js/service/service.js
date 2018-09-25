@@ -159,8 +159,6 @@ angular.module('myApp').factory('Service', ['$http', '$q', function($http, $q){
     }
     
     function ignoreOrder(id_order, id_user, retVal){
-    	alert("ignoreOrder Service " + retVal);
-    	var deferred = $q.defer();
     	$http.put(REST_SERVICE_URI + '/order/ignore/' + id_order + '/' + id_user + '/' + retVal)
     	.then(
     			function (response) {
@@ -188,7 +186,6 @@ angular.module('myApp').factory('Service', ['$http', '$q', function($http, $q){
     	);
     	return deferred.promise;
     }
-    
     
     function countNewOrder(id) {
     	var deferred = $q.defer();
@@ -220,10 +217,8 @@ angular.module('myApp').factory('Service', ['$http', '$q', function($http, $q){
     	return deferred.promise;
     }
 
-    //    function insertAdvert(id_model, id_marka, year_of_issue, gov_number, miliage, seats, location, transmission, body, drive, engine, fuel, consumption, demage, accessory, insurance, cena, text){
    	function insertAdvert(advert, id_user, newAdvertDate){
     	 var deferred = $q.defer();
-//         $http.post(REST_SERVICE_URI + 'advert/' + id_model + id_marka + year_of_issue + gov_number + miliage + seats + location + transmission + body + drive + engine + fuel + consumption + demage + accessory + insurance + cena + text )
          $http.post(REST_SERVICE_URI + 'advert/' + id_user +'/' + newAdvertDate, advert)
              .then(
              function (response) {
@@ -556,7 +551,6 @@ angular.module('myApp').factory('Service', ['$http', '$q', function($http, $q){
 
 
     function getUserById(id) {
-    	alert('ID ' + id);
         var deferred = $q.defer();
         $http.get(REST_SERVICE_URI + 'user/' + 'getuserbyid/' + id)
             .then(

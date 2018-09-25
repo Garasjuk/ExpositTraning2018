@@ -173,33 +173,33 @@
 								<div class="col-md-6">	
 									<select name="mileageStart" class="form-control" ng-model="ctrl.search.mileageStart">
 												<option selected="selected" ></option>
-												<option> 0 </option>
-												<option> 100 000 </option>
-												<option> 200 000 </option>
-												<option> 300 000 </option>
-												<option> 400 000 </option>
-												<option> 500 000 </option>
-												<option> 600 000 </option>
-												<option> 700 000 </option>
-												<option> 800 000 </option>
-												<option> 900 000 </option>
-												<option> 1 000 000 </option>
+												<option> 1 </option>
+												<option> 100000 </option>
+												<option> 200000 </option>
+												<option> 300000 </option>
+												<option> 400000 </option>
+												<option> 500000 </option>
+												<option> 600000 </option>
+												<option> 700000 </option>
+												<option> 800000 </option>
+												<option> 900000 </option>
+												<option> 1000000 </option>
 									</select>
 								</div>
 								<div class="col-md-6">	
 									<select name="mileageFinish" class="form-control" ng-model="ctrl.search.mileageFinish">
 											<option selected="selected" ></option>
-											<option> 0 </option>
-											<option> 100 000 </option>
-											<option> 200 000 </option>
-											<option> 300 000 </option>
-											<option> 400 000 </option>
-											<option> 500 000 </option>
-											<option> 600 000 </option>
-											<option> 700 000 </option>
-											<option> 800 000 </option>
-											<option> 900 000 </option>
-											<option> 1 000 000 </option>
+											<option> 1 </option>
+											<option> 100000 </option>
+											<option> 200000 </option>
+											<option> 300000 </option>
+											<option> 400000 </option>
+											<option> 500000 </option>
+											<option> 600000 </option>
+											<option> 700000 </option>
+											<option> 800000 </option>
+											<option> 900000 </option>
+											<option> 1000000 </option>
 									</select>
 								</div>
 							</div>
@@ -1013,7 +1013,7 @@
 						<div class="form-group col-md-12">
 							<label class="col-md-2 control-lable" for="file">Series passport</label>
 							<div class="col-md-7">
-								<input type="text" ng-model="ctrl.user.series_passport" name="series_passport" placeholder="max: 3" ng-maxlength="3" class="form-control input-sm" placeholder="Enter your Series passport" required />
+								<input type="text" id="inputSeriesPassport" onkeyup="validateSeriesPassport();" ng-model="ctrl.user.series_passport" name="series_passport" placeholder="max: 3" ng-maxlength="3" class="form-control input-sm" placeholder="Enter your Series passport" required />
 							</div>
 						</div>
 					</div>
@@ -2097,6 +2097,10 @@ function checkPass()
 	  var element = document.getElementById('input-field');
 	  element.value = element.value.replace(/[^A-Z@]+/, '');
 	};
+function validateSeriesPassport() {
+	var element = document.getElementById('inputSeriesPassport');
+	element.value = element.value.replace(/[^A-Z@]+/, '');
+};
  
 </script>
 

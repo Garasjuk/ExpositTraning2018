@@ -19,7 +19,6 @@ public class TransmissionDaoImpl implements TransmissionDao {
 
 	@Override
 	public List<Transmission> getAllTransmission() {
-
 		  List<Transmission> list = (List<Transmission>) sessionFactory.getCurrentSession().createQuery("from Transmission").list();
 		  return list;
 	}

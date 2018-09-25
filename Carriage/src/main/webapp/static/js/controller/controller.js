@@ -119,6 +119,7 @@ angular.module('myApp').filter('startFrom', function(){
 					self.newUserForm = newUserForm;
 					self.activeAdvert = activeAdvert;
 					self.activeUser = activeUser;
+					self.ignoreUser = ignoreUser;
 					self.createAdvert = createAdvert;
 					self.insertAdvert = insertAdvert;
 					self.saveAdvert = saveAdvert;
@@ -189,9 +190,6 @@ angular.module('myApp').filter('startFrom', function(){
 					getAllOrder();
 					getAllAbout();
 					
-					
-					
-					
 //------------------Search-----------------------------------
 					$scope.searchFunction = function() {
 						  Service.getSearch(self.search).then(function(d) {
@@ -246,7 +244,6 @@ angular.module('myApp').filter('startFrom', function(){
 					  }
 					          					
 //	-----------------------------------------------------------------------------------------------------			
-					
 
 					  function contact (){
 						  falseBlock();
@@ -410,14 +407,19 @@ angular.module('myApp').filter('startFrom', function(){
 					} 
 
 					function removeYourAdvert(id){
-						deleteAdvert(id);
+						if(confirm("Are you shure ?")){
+							deleteAdvert(id);
+							fetchAllAdvert();
+							yourAdvert();
+						}
+						
 					} 
 					
 					function deleteAdvert(id) {
 						Service.deleteAdvert(id).then(
-								function(errResponse) {
-									console.error('Error while deleting User');
-								});
+							function(errResponse) {
+								console.error('Error while deleting User');
+							});
 					}
 					
 					function yourAdvert(){
@@ -563,6 +565,19 @@ angular.module('myApp').filter('startFrom', function(){
 						newUserForm();
 					}
 					
+					function ignoreUser(id){
+						if(confirm("Are you shure ?")){
+							Service.deleteUser(id).then(function(d) {
+							}, function(errResponse) {
+								console.error('Error while fetching User');
+							});	
+							falseBlock();
+							countNewUser();									
+							countNewAdvert();
+							newUserForm();
+						}
+					}
+					
 					function newUserForm(){
 						Service.getNewUser().then(function(d) {
 							self.newUser = d;
@@ -574,7 +589,6 @@ angular.module('myApp').filter('startFrom', function(){
 					}
 
 					function newAdvertForm(){
-//						alert('New Advert Form');
 						Service.getNewAdvert().then(function(d) {
 							self.newAdvert = d;
 						}, function(errResponse) {
@@ -585,12 +599,6 @@ angular.module('myApp').filter('startFrom', function(){
 					}
 
 					function modelById(id){
-//						alert(id);
-//						Service.modelById(id).then(function(d) {
-//							self.modelById = d;
-//						}, function(errResponse) {
-//							console.error('Error while fetching Advert');
-//						});
 						$scope.modelById = id;
 						falseBlock();
 						$scope.model = true;
@@ -599,7 +607,6 @@ angular.module('myApp').filter('startFrom', function(){
 					
 					
 					function uploadFile() {
-//						alert ('uploadFile');
 						
 						var file = document.getElementById('myFile').files[0];
 						var uploadUrl = "http://localhost:8080/Carriage/static/photo";
@@ -892,7 +899,6 @@ angular.module('myApp').filter('startFrom', function(){
 					}
 
 					function advert() {
-//						alert('Advert');		
 						falseBlock();
 						$scope.advert = true;
 						$scope.myForm.$setPristine(); // advert Form
@@ -946,7 +952,6 @@ angular.module('myApp').filter('startFrom', function(){
 								falseBlock();
 								$scope.home = true;	
 								self.loginUser = d;
-//								$sessionStorage.loginUser = d;
 								$scope.buttonLogin = false;
 								$scope.buttonLogout = true;
 										if (d.id_role == 1){
@@ -958,7 +963,6 @@ angular.module('myApp').filter('startFrom', function(){
 											$scope.tenant = true;
 										}
 										if (d.id_role == 3){
-//											alert('Your id  ' + d.id);
 											countNewOrder(d.id);
 											$scope.landlord = true;
 										}
@@ -974,6 +978,5 @@ angular.module('myApp').filter('startFrom', function(){
 						}, function(errResponse) {
 							console.error('Error while creating User');
 						});
-						 // about Form
 					}
 				} ]);

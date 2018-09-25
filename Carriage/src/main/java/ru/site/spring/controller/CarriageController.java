@@ -91,32 +91,18 @@ public class CarriageController {
     @Autowired
     SearchService searchService;
     
-    
-    
-    
     //------------------- Search ---------------------------------------------------------------------
-
     @RequestMapping(value = "/search/", method = RequestMethod.POST)
     public ResponseEntity <List> getSearch (@RequestBody() Search search) {
-    	
-//    	System.out.println("getSearch");
-    	
-//    	Search currenSearch;
-//    	
-//    	
-//    	currenSearch.setCena(cena);
     	List list = searchService.getSearch(search);
     	if(list.isEmpty()){
     		log.info("getSearch ");
     		return new ResponseEntity <List> (HttpStatus.NO_CONTENT);
     	}
     	return new ResponseEntity <List> (list, HttpStatus.OK);
-//    	return null;
     }
     
-    
     //------------------- Update a User Active --------------------------------------------------------
-    
     @RequestMapping(value = "/user/changePass/{id}/{pass}", method = RequestMethod.PUT)
     public ResponseEntity updatPassUser(@PathVariable("id") long id, @PathVariable("pass") String pass) {
     	if (id > 0 ) {
@@ -392,7 +378,7 @@ public class CarriageController {
     	return new ResponseEntity <List> (list, HttpStatus.OK);
     }
 
-//-------------------Count Advert--------------------------------------------------------
+    //-------------------Count Advert--------------------------------------------------------
     @RequestMapping(value = "/advert/count/", method = RequestMethod.GET)
     public ResponseEntity countNewAdvert() {
     	int  countAdvert = advertService.countNewAdvert();
@@ -447,7 +433,7 @@ public class CarriageController {
     	return new ResponseEntity (countUser, HttpStatus.OK);
     }
  
-  //-------------------Retrieve All Category--------------------------------------------------------
+    //-------------------Retrieve All Category--------------------------------------------------------
     @RequestMapping(value = "/user/category/", method = RequestMethod.GET)
     public ResponseEntity<List<Category>> listAllCategory() {
         List<Category> category = categoryService.getAllCategory();
@@ -485,13 +471,6 @@ public class CarriageController {
 	    	user.setId_category(1);
 	    	user.setPass(DigestUtils.md5Hex(temp));
 	    	user.setDate_registration(date);
-	 
-	    	System.out.println("You register as " + user.getId_role());
-	    	System.out.println("Name " + user.getLast_name());
-	    	System.out.println("First Nmae  " + user.getFirst_name());
-	    	System.out.println("Series passport  " + user.getSeries_passport());
-
-	    	
 	    	
 	        userService.saveUser(user);
 	        
@@ -501,7 +480,6 @@ public class CarriageController {
     	}else {
     		return null;
     	}
-    	
     }
     
     //------------------- Update a User Active --------------------------------------------------------
@@ -515,7 +493,6 @@ public class CarriageController {
     }
      
     //------------------- Update a User --------------------------------------------------------
-     
     @RequestMapping(value = "/user/{id}/{issued_passport}/{date_birthday}/{issued_license}/{valid_license}", method = RequestMethod.PUT)
     public ResponseEntity<User> updateUser(@PathVariable("id") long id, @PathVariable("issued_passport") String issued_passport, @PathVariable("date_birthday") String date_birthday, @PathVariable("issued_license") String issued_license, @PathVariable("valid_license") String valid_license, @RequestBody User user) {
     	Date date = new Date();
@@ -560,6 +537,11 @@ public class CarriageController {
             log.info("deleteUser " + id);
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
+        try {
+			emailsend.sendMessage(user.getEmail(), "Delete from Carriage", "Your user is delete ");
+		} catch (IOException e) {
+			log.error("createUser " + e);
+		}
         userService.deleteUserById(id);
         return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
     }
@@ -573,7 +555,7 @@ public class CarriageController {
     }
  
     
-//-------------------Get  All New User--------------------------------------------------------
+    //-------------------Get  All New User--------------------------------------------------------
     @RequestMapping(value = "/user/newuser/", method = RequestMethod.GET)
     public ResponseEntity <List> getNewUser() {
     	List list = userService.getNewUser();
@@ -584,7 +566,7 @@ public class CarriageController {
     	return new ResponseEntity <List> (list, HttpStatus.OK);
     }
     
-  //-------------------Log in a User--------------------------------------------------------
+    //-------------------Log in a User--------------------------------------------------------
     @RequestMapping(value = "/user/login/{email}/{pass}", method = RequestMethod.GET)
     public ResponseEntity<User> login(@PathVariable("email") String email, @PathVariable("pass") String pass ) {
         User user = userService.findByEmail(email);
@@ -600,8 +582,7 @@ public class CarriageController {
         }
     }
     
-    
-//-------------------By Email--------------------------------------------------------
+    //-------------------By Email--------------------------------------------------------
     @RequestMapping(value = "/user/byEmail/{email}", method = RequestMethod.GET)
     public ResponseEntity<User> login(@PathVariable("email") String email ) {
         User user = userService.findByEmail(email);
@@ -613,7 +594,7 @@ public class CarriageController {
         }
     }
     
- //-------------------Profile in a User--------------------------------------------------------
+	//-------------------Profile in a User--------------------------------------------------------
     @RequestMapping(value = "/user/profile/{id}", method = RequestMethod.GET)
     public ResponseEntity<User> profile(@PathVariable("id") long id ) {
         User user = userService.findById(id);
@@ -625,7 +606,7 @@ public class CarriageController {
         }
     }
 
-  //-------------------getUserById--------------------------------------------------------
+    //-------------------getUserById--------------------------------------------------------
     @RequestMapping(value = "/user/getuserbyid/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> getUserById(@PathVariable("id") long id) {
         User user = userService.findById(id);

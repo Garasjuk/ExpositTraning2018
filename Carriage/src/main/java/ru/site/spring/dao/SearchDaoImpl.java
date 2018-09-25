@@ -42,7 +42,6 @@ public class SearchDaoImpl implements SearchDao {
 				+ "INNER JOIN fuel ON advert.id_fuel = fuel.id ";
 	
 		str += " WHERE ";
-//		System.out.println("Id_marka : " + search.getId_marka());
 		if (search.getId_marka() > 0) {
 			if (metka == false) {
 				str += " advert.id_marka like " + search.getId_marka();
@@ -52,7 +51,6 @@ public class SearchDaoImpl implements SearchDao {
 			}
 			syntaxWhere = true;
 		}
-//		System.out.println("Id_model : " + search.getId_model());
 		if (search.getId_model() > 0) {
 			if (metka == false) {
 				str += " advert.id_model like " + search.getId_model();
@@ -62,7 +60,6 @@ public class SearchDaoImpl implements SearchDao {
 			}	
 			syntaxWhere = true;
 		}
-//		System.out.println("Year_of_issue : " + search.getYear_of_issue());
 		if (search.getYear_of_issueStart() >0 && search.getYear_of_issueFinish() >0 ) {
 			if (metka == false) {
 				str += " advert.year_of_issue between " + search.getYear_of_issueStart() + " and " + search.getYear_of_issueFinish();
@@ -72,7 +69,7 @@ public class SearchDaoImpl implements SearchDao {
 			}
 			syntaxWhere = true;
 		}
-//		System.out.println("Mileage : " + search.getMileage());
+		
 		if (search.getMileageStart() > 0 && search.getMileageFinish() > 0) {
 			if (metka == false) {
 				str += " advert.mileage between " + search.getMileageStart() + " and " + search.getMileageFinish();
@@ -96,7 +93,7 @@ public class SearchDaoImpl implements SearchDao {
 				str += " advert.id_transmission like " + search.getId_transmission();
 				metka = true;
 			}else {
-				str += " and advert.id_transmissionts like " + search.getId_transmission();
+				str += " and advert.id_transmission like " + search.getId_transmission();
 			}		
 			syntaxWhere = true;
 		}
@@ -146,12 +143,11 @@ public class SearchDaoImpl implements SearchDao {
 			syntaxWhere = true;
 		}
 		
-		System.out.println("SQL1 : " + str);
 		if (!syntaxWhere) {
 			str = str.replaceAll("WHERE","");
 		}
 		
-		System.out.println("SQL2 : " + str);
+		log.info("SQL search " + str);
 		Query query = null;
 		 try {
 			 query = sessionFactory.getCurrentSession().createSQLQuery(str);			 

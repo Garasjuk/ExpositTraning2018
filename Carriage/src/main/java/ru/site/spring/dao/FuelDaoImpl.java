@@ -19,7 +19,6 @@ public class FuelDaoImpl implements FuelDao {
 
 	@Override
 	public List<Fuel> getAllFuel() {
-
 		  List<Fuel> list = (List<Fuel>) sessionFactory.getCurrentSession().createQuery("from Fuel").list();
 		  return list;
 	}

@@ -45,7 +45,6 @@ public class OrderDaoImpl implements OrderDao {
 
 	@Override
 	public void updateActiveOrder(long id_order, int price) {
-//		System.out.println("updateActiveOrder " + price);
 		Query query = sessionFactory.getCurrentSession().createSQLQuery("UPDATE orders SET active = ? , cena = ? WHERE id = ?");
 		query.setInteger(0, 2);
 		query.setInteger(1, price);

@@ -19,7 +19,6 @@ public class MarkaDaoImpl implements MarkaDao {
 
 	@Override
 	public List<Marka> getAllMarka() {
-
 		  List<Marka> list = (List<Marka>) sessionFactory.getCurrentSession().createQuery("from Marka").list();
 		  return list;
 	}

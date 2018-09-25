@@ -19,7 +19,6 @@ public class ModelDaoImpl implements ModelDao {
 
 	@Override
 	public List<Model> getAllModel() {
-
 		  List<Model> list = (List<Model>) sessionFactory.getCurrentSession().createQuery("from Model").list();
 		  return list;
 	}
