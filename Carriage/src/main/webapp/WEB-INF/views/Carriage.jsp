@@ -448,7 +448,7 @@
 						<span class="lead" ng-bind="a[4]"></span>
 				</div>
 				<div class="formcontainer"  >
-					<button type="button" ng-click="ctrl.backAdvert()" class="btn btn-outline-dark btn-lg" ><--  Back</button>
+					<button type="button" id="destroyMap" ng-click="ctrl.backAdvert()" class="btn btn-outline-dark btn-lg" ><--  Back</button>
 					<br/>
 						<span ng-repeat="p in ctrl.allPhoto" ng-if="p[1] == a[0]">
 							<img ng-src="{{p[2]}}" width="100" height="100px" />
@@ -497,6 +497,12 @@
 								<div class="col-md-7">
 									<span ng-bind="a[9]"></span>
 								</div>
+							  <div id="carHere" style="width: 600px; height: 400px"></div>	
+							  
+							  <input type="hidden" id="lat" ng-model="lat" />
+							  <input type="hidden" id="lon" ng-model="lon" />
+							  <button onclick="showMap()">Show</button>
+							  {{lat}} ,{{lon}}
 							</div>
 						</div>
 	
@@ -2022,6 +2028,9 @@
 			<div class="formcontainer" >
 				<form name="contactForm" class="form-horizontal">	
 					<div id="map" style="width: 600px; height: 400px"></div>
+				
+				
+
 					<div class="row">
 						<div class="form-group col-md-12">
 							<label class="col-md-2 control-lable" for="file">Contact</label>
@@ -2075,21 +2084,32 @@ function checkPass()
 } 
 </script>
 
+<script type="text/javascript">
+function showMap(){
+	 var lat = document.getElementById('lat').value;
+	 var lon = document.getElementById('lon').value;
+	alert ("lat " + lat + " lon " + lon);
+    var myCar = new ymaps.Map("carHere", {center: [lat, lon ], zoom: 16}); 
+        
+    var myPlacemarkCar = new ymaps.Placemark([lat, lon]);
+    myCar.geoObjects.add(myPlacemarkCar);
+    
+    document.getElementById('destroyMap').onclick = function () {
+        myCar.destroy();
+    };
+}
+</script>
+
  <script>
  ymaps.ready(init);
  
  function init(){ 
-     var myMap = new ymaps.Map("map", {
-         center: [53.703482, 23.818370 ],
-         zoom: 16
-         
-     }); 
+     var myMap = new ymaps.Map("map", {center: [53.703482, 23.818370 ], zoom: 16}); 
      
      var myPlacemark = new ymaps.Placemark([53.703482, 23.818370], {
          hintContent: 'We are here!',
          balloonContent: 'We are here.'
      });
-     
      myMap.geoObjects.add(myPlacemark);
  }
  
@@ -2105,7 +2125,7 @@ function validateSeriesPassport() {
 </script>
 
  	<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&onload=init" type="text/javascript"></script>
-	
+	<script src="https://catatron.com/angular-ymaps/angular-ymaps.js"></script>
 
 	<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
 	

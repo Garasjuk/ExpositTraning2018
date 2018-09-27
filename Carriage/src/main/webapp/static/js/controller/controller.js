@@ -5,7 +5,7 @@ angular.module('myApp').filter('startFrom', function(){
 		    start = +start;
 		    return input.slice(start);
 		  }
-		}).controller('Controller', ['$scope',  'Service',
+		}).controller('Controller', ['$scope', 'Service',
 				function($scope, Service, $sessionStorage) {
 					var self = this;
 					
@@ -172,7 +172,8 @@ angular.module('myApp').filter('startFrom', function(){
 					$scope.calculateOrder = false;
 					$scope.invalidPrice = false;
 					$scope.contact = false;
-					
+					$scope.lat = 38.3164; 
+					$scope.lon = 57.5122;
 					
 					fetchAllUsers();
 					fetchAllCategory();
@@ -208,6 +209,12 @@ angular.module('myApp').filter('startFrom', function(){
 					}
 					
 //-----------------------------------------------------------
+					
+//------------------Map--------------------------------------
+					
+//-----------------------------------------------------------					
+					
+					
 					
 //	-----------------Pagination--------------------------------
 					$scope.currentPage = 0;
@@ -919,7 +926,9 @@ angular.module('myApp').filter('startFrom', function(){
 						$scope.tenant = false;
 						$scope.landlord = false;
 						$scope.loginUser = '';
+						location.reload();
 						$scope.myForm.$setPristine(); // logout Form
+						
 					}
 
 					function home() {
