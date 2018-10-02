@@ -48,7 +48,8 @@ angular.module('myApp').filter('startFrom', function(){
 							gov_number : ' ', 
 							mileage : ' ', 
 							seats : ' ', 
-							location : ' ', 
+							latitude : ' ',
+							longitude : ' ',
 							id_transmission : ' ', 
 							id_body : ' ', 
 							id_drive : ' ', 
@@ -172,8 +173,7 @@ angular.module('myApp').filter('startFrom', function(){
 					$scope.calculateOrder = false;
 					$scope.invalidPrice = false;
 					$scope.contact = false;
-					$scope.lat = 38.3164; 
-					$scope.lon = 57.5122;
+				
 					
 					fetchAllUsers();
 					fetchAllCategory();
@@ -446,6 +446,11 @@ angular.module('myApp').filter('startFrom', function(){
 
 					function saveAdvert (id_user){
 						var newAdvertDate = document.getElementById('newAdvertDate').value;
+						  var latNew = document.getElementById('latNew').value;
+						  var lonNew = document.getElementById('lonNew').value;
+						 // alert("latNew " + latNew + "; lonNew " + lonNew);
+						  self.adv.latitude = latNew;
+						  self.adv.longitude = lonNew;
 						insertAdvert(self.adv, id_user,newAdvertDate );
 					}
 				
@@ -539,6 +544,7 @@ angular.module('myApp').filter('startFrom', function(){
 					
 					function createAdvert(){
 						falseBlock();
+						resetAdvert();
 						$scope.createAdvert = true;
 					}
 					
@@ -608,6 +614,7 @@ angular.module('myApp').filter('startFrom', function(){
 					function modelById(id){
 						$scope.modelById = id;
 						falseBlock();
+						
 						$scope.model = true;
 						$scope.myForm.$setPristine();
 					}
@@ -777,6 +784,10 @@ angular.module('myApp').filter('startFrom', function(){
 					}
 					
 					function updateAdvert() {
+						var latEdit = document.getElementById('latEdit').value;
+						var lonEdit = document.getElementById('lonEdit').value;
+						self.adv.latitude = latEdit;
+						self.adv.longitude = lonEdit;
 						Service.updateAdvert(self.adv).then(fetchAllAdvert,
 						function(errResponse) {
 							console.error('Error while updating Advert');
@@ -850,7 +861,8 @@ angular.module('myApp').filter('startFrom', function(){
 								gov_number : '', 
 								mileage : '', 
 								seats : '', 
-								location : '', 
+								latitude : ' ',
+								longitude : ' ',
 								id_transmission : '', 
 								id_body : '', 
 								id_drive : '', 

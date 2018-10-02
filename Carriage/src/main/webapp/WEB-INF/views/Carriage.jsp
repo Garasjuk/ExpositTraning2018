@@ -499,10 +499,10 @@
 								</div>
 							  <div id="carHere" style="width: 600px; height: 400px"></div>	
 							  
-							  <input type="hidden" id="lat" ng-model="lat" />
-							  <input type="hidden" id="lon" ng-model="lon" />
-							  <button onclick="showMap()">Show</button>
-							  {{lat}} ,{{lon}}
+						 	  <input type="text" id="lat" ng-model="a[9]" />
+							  <input type="text" id="lon" ng-model="a[29]" />
+							  <button id="showMap" onclick="showMap()">Show</button>
+							 
 							</div>
 						</div>
 	
@@ -1180,7 +1180,10 @@
 	
 						<tr>
 							<th>Location</th>
-							<td><span ng-bind="a[9]"></span></td>
+							<td>
+						 	  <span ng-bind="a[9]"> </span> 
+							  <span ng-bind="a[28]"> </span>
+								</td>
 						</tr>
 	
 						<tr>
@@ -1310,7 +1313,7 @@
 					</div>
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="file">Seats</label>
+							<label class="col-md-2 control-lable" for="file">Seats *</label>
 							<div class="col-md-7">
 								<input type="text" ng-model="ctrl.adv.seats" class="form-control input-sm" required />
 							</div>
@@ -1320,7 +1323,12 @@
 						<div class="form-group col-md-12">
 							<label class="col-md-2 control-lable" for="file">Location</label>
 							<div class="col-md-7">
-								<input type="text" ng-model="ctrl.adv.location" class="form-control input-sm" />
+								<div id="iHere" style="width: 600px; height: 400px"></div>
+							
+									<input type="text" id="latNew" ng-model="ctrl.adv.latitude" />
+									<input type="text" id="lonNew" ng-model="ctrl.adv.longitude" />
+								
+								<button onclick="getMyMap()">GetMap</button>
 							</div>
 						</div>
 					</div>
@@ -1336,7 +1344,7 @@
 					
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="file">Transmission</label>
+							<label class="col-md-2 control-lable" for="file">Transmission *</label>
 							<div class="col-md-7">
 								<select name="transmission" ng-model="ctrl.adv.id_transmission">
 									<option value="{{t.id}}" ng-repeat="t in ctrl.allTransmission" class="form-control input-sm" required   >
@@ -1349,7 +1357,7 @@
 					
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="file">Body</label>
+							<label class="col-md-2 control-lable" for="file">Body *</label>
 							<div class="col-md-7">
 								<select name="body" ng-model="ctrl.adv.id_body">
 									<option value="{{b.id}}" ng-repeat="b in ctrl.allBody" class="form-control input-sm" required   >
@@ -1362,7 +1370,7 @@
 					
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="file">Drive</label>
+							<label class="col-md-2 control-lable" for="file">Drive *</label>
 							<div class="col-md-7">
 								<select name="drive" ng-model="ctrl.adv.id_drive">
 									<option value="{{d.id}}" ng-repeat="d in ctrl.allDrive" class="form-control input-sm"  required  >
@@ -1470,12 +1478,12 @@
 					</div>
 					<div class="row">
 						<div class="form-actions floatRight">
-							<button type="button" ng-click="ctrl.saveAdvert(ctrl.loginUser.id)" class="btn btn-primary btn-sm" ng-disabled="advertForm.$invalid">Insert advert</button>
+							<button type="button" id="destroyMap" ng-click="ctrl.saveAdvert(ctrl.loginUser.id)" on class="btn btn-primary btn-sm" ng-disabled="advertForm.$invalid">Insert advert</button>
 							<button type="button" ng-click="ctrl.resetAdvert()" class="btn btn-warning btn-sm" ng-disabled="advertForm.$pristine">Reset Form</button>
 						</div>
 					</div>
 				</form>
-			</div>
+			</div>	
 		</div>
 		
 		<div ng-repeat="a in ctrl.advert" ng-show="yourAdvert" >
@@ -1553,7 +1561,7 @@
 				<span class="lead">Edit advert</span>
 			</div>
 			<div class="formcontainer" >
-					<form ng-submit="ctrl.submit()" name="editAdvertForm" class="form-horizontal">		
+					<form  name="editAdvertForm" class="form-horizontal">		
 						<input type="hidden" ng-model="a.id" />
 						<div class="row">
 							<div class="form-group col-md-12">
@@ -1561,7 +1569,7 @@
 								<div class="col-md-7">
 									
 								<select name="marka" ng-model="ctrl.adv.id_marka" >
-									<option value="{{amar.id}}" ng-repeat="amar in ctrl.allMarka" ng-selected="ctrl.adv.id_model == amar.id" required>
+									<option value="{{amar.id}}" ng-repeat="amar in ctrl.allMarka" ng-selected="ctrl.adv.id_marka == amar.id" required>
 										{{amar.marka}}
 									</option>
 								</select> 
@@ -1616,7 +1624,12 @@
 							<div class="form-group col-md-12">
 								<label class="col-md-2 control-lable" for="file">Location</label>
 								<div class="col-md-7">
-									<input type="text" ng-model="ctrl.adv.location" class="form-control input-sm" />
+									
+									 <div id="carHereEdit" style="width: 600px; height: 400px"></div>	
+							  
+								 	  <input type="text" id="latEdit" ng-model="ctrl.adv.latitude" />
+									  <input type="text" id="lonEdit" ng-model="ctrl.adv.longitude" />
+									  <button id="showEditMap" onclick="showEditMap()">Show</button>
 								</div>
 							</div>
 						</div>
@@ -2084,20 +2097,98 @@ function checkPass()
 } 
 </script>
 
+
 <script type="text/javascript">
+
+function getMyMap(){
+	
+	var mapHere = new ymaps.Map("iHere", {center: [53.6687, 23.8260 ], zoom: 12});         
+	    
+    document.getElementById('destroyMap').onclick = function () {
+    	mapHere.destroy();
+    };
+        
+    mapHere.events.add('click', function (e) {
+        // Получение координат щелчка
+        var coords = e.get('coords');
+        mapHere.balloon.open(coords, {
+            contentHeader:'Place',
+            contentBody:'<p>Your car here.</p>'
+        });
+      	//alert ("lat : " + coords[0].toPrecision(6) + ", lon : " + coords[1].toPrecision(6));
+        document.getElementById('latNew').value = coords[0].toPrecision(6);
+        document.getElementById('lonNew').value = coords[1].toPrecision(6); 
+    }); 
+     
+}
+</script>
+
+
+<script type="text/javascript">
+
+
 function showMap(){
 	 var lat = document.getElementById('lat').value;
 	 var lon = document.getElementById('lon').value;
-	alert ("lat " + lat + " lon " + lon);
-    var myCar = new ymaps.Map("carHere", {center: [lat, lon ], zoom: 16}); 
+	//alert ("lat : " + lat + ", lon : " + lon);
+	
+		var	thisCar = new ymaps.Map("carHere", {center: [lat, lon ], zoom: 14}); 
         
-    var myPlacemarkCar = new ymaps.Placemark([lat, lon]);
-    myCar.geoObjects.add(myPlacemarkCar);
-    
+	    var myPlacemarkCar = new ymaps.Placemark([lat, lon]);
+	    thisCar.geoObjects.add(myPlacemarkCar);
+	document.getElementById("showMap").disabled = true; 
+	    
     document.getElementById('destroyMap').onclick = function () {
-        myCar.destroy();
+    	thisCar.destroy();
+    	document.getElementById("showMap").disabled = false; 
     };
+    
+   // myCar.events.add('click', function (e) {
+   //     // Получение координат щелчка
+   //     var coords = e.get('coords');
+   //     myCar.balloon.open(coords, {
+   //         contentHeader:'Событие!',
+   //         contentBody:'<p>Your car here.</p>'
+   //     });
+   //     
+   //     document.getElementById('lat').value = coords[0].toPrecision(6);
+   //     document.getElementById('lon').value = coords[1].toPrecision(6); 
+   // }); 
+  
+        
+    
 }
+function showEditMap(){
+	
+	var lat = document.getElementById('latEdit').value;
+	var lon = document.getElementById('lonEdit').value;
+	alert ("lat : " + lat + ", lon : " + lon);
+   var myCar = new ymaps.Map("carHereEdit", {center: [lat, lon ], zoom: 14}); 
+       
+   var myPlacemarkCar = new ymaps.Placemark([lat, lon]);
+   myCar.geoObjects.add(myPlacemarkCar);
+   
+   document.getElementById("showEditMap").disabled = true; 
+   
+   document.getElementById('destroyMap').onclick = function () {
+       myCar.destroy();
+   document.getElementById("showEditMap").disabled = false; 
+   };
+   
+   myCar.events.add('click', function (e) {
+       // Получение координат щелчка
+       var coords = e.get('coords');
+       myCar.balloon.open(coords, {
+           contentHeader:'New place.',
+           contentBody:'<p>Your new place.</p>'
+       });
+       
+       document.getElementById('latEdit').value = coords[0].toPrecision(6);
+       document.getElementById('lonEdit').value = coords[1].toPrecision(6); 
+   }); 
+}
+
+
 </script>
 
  <script>
@@ -2125,7 +2216,7 @@ function validateSeriesPassport() {
 </script>
 
  	<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&onload=init" type="text/javascript"></script>
-	<script src="https://catatron.com/angular-ymaps/angular-ymaps.js"></script>
+ 	
 
 	<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
 	

@@ -35,8 +35,11 @@ public class Advert {
 	@Column(name = "seats")
 	private int seats;
 	
-	@Column(name = "location")
-	private String location;
+	@Column(name = "latitude")
+	private String latitude;
+	
+	@Column(name = "longitude")
+	private String longitude;
 	
 	@Column(name = "id_transmission")
 	private int id_transmission;
@@ -157,12 +160,20 @@ public class Advert {
 		this.seats = seats;
 	}
 
-	public String getLocation() {
-		return location;
+	public String getLatitude() {
+		return latitude;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
 	}
 
 	public int getId_transmission() {

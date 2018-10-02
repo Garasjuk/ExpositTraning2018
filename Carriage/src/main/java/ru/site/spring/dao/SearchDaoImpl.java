@@ -30,10 +30,10 @@ public class SearchDaoImpl implements SearchDao {
 	public List getSearch(Search search) {
 		boolean metka = false, syntaxWhere = false;
 		String str = "SELECT advert.id as '0', advert.id_marka as '1', marka.marka as '2', advert.id_model as '3', model.model as '4',"
-				+ "advert.year_of_issue as '5', advert.gov_number as '6', advert.mileage as '7', advert.seats as '8', advert.location as '9', advert.id_transmission as '10',"
+				+ "advert.year_of_issue as '5', advert.gov_number as '6', advert.mileage as '7', advert.seats as '8', advert.latitude as '9', advert.id_transmission as '10',"
 				+ "transmission.transmission as '11', advert.id_body as '12', body.body as '13', advert.id_drive as '14', drive.drive as '15', advert.id_engine as '16',"
 				+ "engine.engine as '17', advert.id_fuel as '18', fuel.fuel as '19', advert.consumption as '20', advert.damage as '21', advert.accessory as '22', advert.insurance as '23',"
-				+ "advert.cena as '24', advert.text as '25', advert.date_registration as '26', advert.active as '27', advert.id_user as '28'"
+				+ "advert.cena as '24', advert.text as '25', advert.date_registration as '26', advert.active as '27', advert.id_user as '28', advert.longitude as '29'"
 				+ "FROM (((((model INNER JOIN (advert INNER JOIN marka ON advert.id_marka = marka.id) ON (advert.id_model = model.id) AND (model.id_marka = marka.id)) "
 				+ "INNER JOIN transmission ON advert.id_transmission = transmission.id) "
 				+ "INNER JOIN body ON advert.id_body = body.id) "
